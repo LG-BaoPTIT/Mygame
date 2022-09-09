@@ -23,7 +23,7 @@ public class Player extends Entity {
         this.gp=gp;
         this.keyH=keyH;
         setDefaultValues();
-      //  getPlayerImage();
+        getPlayerImage();
     }
     public void setDefaultValues(){
         x=100;
@@ -34,17 +34,18 @@ public class Player extends Entity {
     public void getPlayerImage(){
         
         try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
+          up1 = ImageIO.read(getClass().getResource("/res/player/boy_up_1.png"));
+          up2 = ImageIO.read(getClass().getResource("/res/player/boy_up_2.png"));
 			
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
+          down1 = ImageIO.read(getClass().getResource("/res/player/boy_down_1.png"));
+          down2 = ImageIO.read(getClass().getResource("/res/player/boy_down_2.png"));
+           
+           left1 =ImageIO.read(getClass().getResource("/res/player/boy_left_1.png"));
+           
+          left2 = ImageIO.read(getClass().getResource("/res/player/boy_left_1.png"));
 			
-            right1 =ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 =ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+          right1 =ImageIO.read(getClass().getResource("/res/player/boy_right_1.png"));
+          right2 =ImageIO.read(getClass().getResource("/res/player/boy_right_1.png"));
 			
         }catch(IOException e){
             e.printStackTrace();
@@ -74,8 +75,8 @@ public class Player extends Entity {
         
     }
     public void draw(Graphics2D g2){
-        g2.setColor(Color.WHITE);
-      g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+      //  g2.setColor(Color.WHITE);
+      //g2.fillRect(x, y, gp.tileSize, gp.tileSize);
        BufferedImage image =null;
        switch(direction){
            case "up":
