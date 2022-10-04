@@ -12,8 +12,10 @@ import java.nio.Buffer;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import entity.Entity;
 import object.OBJ_Key;
-import object.SuperObject;
+
 
 /**
  *
@@ -52,7 +54,7 @@ public class UI {
         }
         
         // CREATE HUD OBJEST
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;

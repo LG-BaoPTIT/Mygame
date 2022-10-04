@@ -6,10 +6,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
-
+import java.util.*;
+import java.io.*;
 import entity.Entity;
 import entity.Player;
-import object.SuperObject;
+
 import tile.TileManager;
 
 // inherited JPanel
@@ -42,13 +43,12 @@ public class GamePanel extends JPanel implements Runnable{
         public UI ui = new UI(this);
         public EventHandler eHandler = new EventHandler(this);
         Thread gameThread;
-//        ENTITY AND OBJECT
-        
-        
+	//ENTITY AND OBJECT
+          
         public Player player = new Player(this,keyH);
-        public SuperObject obj[] = new SuperObject[10];
+        public Entity obj[] = new Entity[10];
 		public Entity npc[] = new Entity[10];
-        
+        ArrayList<Entity> entityList = new ArrayList<>();
 	// GAME STATE
 	public int gameState;
         public final int titleState = 0;
@@ -150,26 +150,37 @@ public class GamePanel extends JPanel implements Runnable{
                     ui.draw(g2);
                 }
                 else {
+
+					
                     //TILE
                     tileM.draw(g2);
-
-                    // OBJECT
-                        for(int i = 0 ; i < obj.length; i++) {
-
-                            if(obj[i] != null) {
-
-                                obj[i].draw(g2, this);
-                            }
-                        }
-                    // NPC
-                    for(int i = 0; i < npc.length;i++) {
-                            if(npc[i] != null) {
-                                    npc[i].draw(g2);
-                            }
-                    }
-
-                    //PLAYER
-                    player.draw(g2);
+					
+					//ADD ENTITIES TO THE LIST
+					entityList.add(player);
+					for(int i=0;i<npc.length;i++){
+						if(npc[i] != null){
+							entityList.add(npc[i]);
+						}
+					}
+					for(int i=0;i<obj.length;i++){
+						if(obj[i] != null){
+							entityList.add(obj[i]);
+						}
+					}
+					//SORT
+					Collections.sort(entityList, new Comparator<Entity>() {
+						@Override
+						public int compare(Entity e1, Entity e2){
+							int result = Integer.compare(e1.worldY, e2.worldY);
+							return result;
+						}
+					});
+					//DRAW ENTITIES
+					for(int i=0;i<entityList.size();i++){
+						entityList.get(i).draw(g2);
+					}
+					//EMPTY ENTITY LIST
+					entityList.clear();
                     //UI
                     ui.draw(g2);
                 }
