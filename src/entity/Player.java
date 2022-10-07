@@ -51,7 +51,6 @@ public class Player extends Entity {
         getPlayerImage();
         getPlayerAttackImage();
     }
-
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
@@ -79,7 +78,6 @@ public class Player extends Entity {
     public int getDefense() {
         return defense = dexterity*currentShield.defenseValue;
     }
-
     public void getPlayerImage() {
 
         up1 = setup("/player/boy_up_1", gp.tileSize, gp.tileSize);
@@ -92,7 +90,6 @@ public class Player extends Entity {
         right2 = setup("/player/boy_right_2", gp.tileSize, gp.tileSize);
 
     }
-
     public void getPlayerAttackImage() {
         attackUp1 = setup("/player/boy_attack_up_1", gp.tileSize, gp.tileSize * 2);
         attackUp2 = setup("/player/boy_attack_up_2", gp.tileSize, gp.tileSize * 2);
@@ -103,7 +100,6 @@ public class Player extends Entity {
         attackRight1 = setup("/player/boy_attack_right_1", gp.tileSize * 2, gp.tileSize);
         attackRight2 = setup("/player/boy_attack_right_2", gp.tileSize * 2, gp.tileSize);
     }
-
     public void update() {
         if (attacking == true) {
             attack();
@@ -194,7 +190,6 @@ public class Player extends Entity {
             }
         }
     }
-
     public void attack() {
         spriteCounter++;
         if (spriteCounter <= 5) {
@@ -240,14 +235,12 @@ public class Player extends Entity {
             attacking = false;
         }
     }
-
     public void pickUpObject(int i) {
 
         if (i != 999) {
 
         }
     }
-
     public void interactNPC(int i) {
         if (gp.keyH.enterPressed == true) {
             if (i != 999) {
@@ -257,36 +250,57 @@ public class Player extends Entity {
             } 
         }
     }
-
     public void contactMonster(int i) {
         if (i != 999) {
             if (invincible == false) {
                 gp.playSE(6);
-                life -= 1;
+                int damage = gp.monster[i].attack - defense;
+                if (damage<0) damage = 0;
+                life -= damage;
                 invincible = true;
             }
         }
     }
-
     public void damageMonster(int i) {
         if (i != 999) {
 
             if (gp.monster[i].invincible == false) {
                 gp.playSE(5);
-                gp.monster[i].life -= 1;
+                int damage = attack - gp.monster[i].defense;
+                if (damage<0) damage = 0;
+                gp.monster[i].life -= damage;
+                gp.ui.addMessage(damage + " damage!");
+                
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
 
-                if (gp.monster[i].life == 0) {
+                if (gp.monster[i].life <= 0) {
                     gp.monster[i].dying = true  ;
-
+                    gp.ui.addMessage("Kill the " + gp.monster[i].name+"!");
+                    gp.ui.addMessage("Exp + " + gp.monster[i].exp+"!");
+                    exp += gp.monster[i].exp;
+                    checkLevelUp();
                 }
             }
-
         }
-
     }
-
+    
+    public void checkLevelUp(){
+        if(exp >= nextLevelExp){
+            level++;
+            nextLevelExp*=2;
+            maxLife+=2;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+            gp.playSE(8);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You are level " + level + " now!\n"
+                    +"You feel stronger!";
+        }
+    }
+    
     public void draw(Graphics2D g2) {
 //		g2.setColor(Color.green);
 //		//draw a rectangle and paint with the chosen color 
