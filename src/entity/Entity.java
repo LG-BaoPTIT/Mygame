@@ -80,11 +80,8 @@ public class Entity {
         this.gp = gp;
     }
 
-    public void setAction() {      
-    }
-    public void damageReaction(){
-        
-    }
+    public void setAction() {}
+    public void damageReaction(){}
     public void speak() {
         if (dialogues[dialogueIndex] == null) {
             dialogueIndex = 0;
@@ -92,22 +89,16 @@ public class Entity {
         gp.ui.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
         switch (gp.player.direction) {
-            case "up":
-                direction = "down";
-                break;
-            case "down":
-                direction = "up";
-                break;
-            case "left":
-                direction = "right";
-                break;
-            case "right":
-                direction = "left";
-                break;
+            case "up":  direction = "down"; break;
+            case "down": direction = "up"; break;
+            case "left":direction = "right"; break;
+            case "right": direction = "left"; break;
         }
     }
 
-    ;
+    public void use(Entity entity) {
+        
+    }
         public void update() {
 
         setAction();
