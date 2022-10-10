@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_FireBall;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
@@ -60,10 +61,9 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-//                worldX = gp.tileSize * 10;
-//		worldY = gp.tileSize * 13;
         speed = 4;
         direction = "down";
+        
         //PLAYER STATUS
         level = 1;
         maxLife = 6;
@@ -75,6 +75,7 @@ public class Player extends Entity {
         coin = 0;
         currentWeapon = new OBJ_Sword_Normal(gp);// the total attack value is decided by strength and weapon
         currentShield = new OBJ_Shield_Wood(gp);// the total defense value is decided by dexterity and shield
+        projectile = new OBJ_FireBall(gp);
         attack = getAttack();
         defense = getDefense();
     }
@@ -128,10 +129,11 @@ public class Player extends Entity {
         
     }
     public void update() {
+        
         if (attacking == true) {
             attack();
         } else if (keyH.upPressed == true || keyH.downPressed
-                || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
+                || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {  
             if (keyH.upPressed == true) {
                 direction = "up";
 
@@ -207,14 +209,28 @@ public class Player extends Entity {
                 standCounter = 0;
             }
         }
-
-//            This needs to be outside of key if staemwnt
+        
+        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30){
+            //SET DEFAULT COORDINATES, DIRECTION AND USER
+            projectile.set(worldX, worldY, direction, true, this);
+            // ADD TO ARRAYLIST
+            
+            gp.projectileList.add(projectile);
+            shotAvailableCounter = 0;
+            
+            gp.playSE(10);
+        } 
+        
+//            This needs to be outside of key if statement
         if (invincible == true) {
             invincibleCounter++;
             if (invincibleCounter > 60) {
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(shotAvailableCounter < 30){
+            shotAvailableCounter++;
         }
     }
     public void attack() {
@@ -249,7 +265,7 @@ public class Player extends Entity {
             solidArea.height = attackArea.height;
             //check monster collision with the updated worldX,worldY and solidArea
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex,attack);
             // after checking collision restore the origin data
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -291,7 +307,7 @@ public class Player extends Entity {
     }
     public void contactMonster(int i) {
         if (i != 999) {
-            if (invincible == false) {
+            if (invincible == false && gp.monster[i].dying==false) {
                 gp.playSE(6);
                 int damage = gp.monster[i].attack - defense;
                 if (damage<0) damage = 0;
@@ -300,7 +316,7 @@ public class Player extends Entity {
             }
         }
     }
-    public void damageMonster(int i) {
+    public void damageMonster(int i,int attack) {
         if (i != 999) {
 
             if (gp.monster[i].invincible == false) {
