@@ -16,8 +16,7 @@ import java.util.logging.Logger;
 import entity.Entity;
 import java.util.ArrayList;
 import object.OBJ_Key;
-
-
+import object.OBJ_ManaCrystal;
 /**
  *
  * @author admin
@@ -28,7 +27,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font maruMonica, purisaB;
-    BufferedImage heart_full, heart_half, heart_blank;
+    BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
     public boolean messageOn = false;
     
     ArrayList<String> message = new ArrayList<>();
@@ -59,6 +58,9 @@ public class UI {
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
+        Entity crystal = new OBJ_ManaCrystal(gp);
+        crystal_full = crystal.image;
+        crystal_blank = crystal.image2;
         
     }
     
@@ -126,6 +128,25 @@ public class UI {
             }
             i++;
             x += gp.tileSize;
+        }
+        //DRAW MAX MANA
+        x=gp.tileSize/2-5;
+        y=(int)(gp.tileSize*1.5);
+        i=0;
+        while(i < gp.player.maxMana){
+            g2.drawImage(crystal_blank, x, y, null);
+            i++;
+            x +=35;
+
+        }
+        //DRAW MANA
+        x=gp.tileSize/2-5;
+        y=(int)(gp.tileSize*1.5);
+        i=0;
+        while(i<gp.player.mana){
+            g2.drawImage(crystal_full, x, y,null);
+            i++;
+            x += 35;
         }
     }
     
@@ -332,31 +353,21 @@ public class UI {
         final int lineHeight = 35;
         
         // NAME 
-        g2.drawString("Level", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Life", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Strength", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Dexterity", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Attack", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Defense", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Exp", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Next Level", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Coin", textX, textY);
-        textY += lineHeight+20;
-        g2.drawString("Weapon", textX, textY);
-        textY += lineHeight + 15;
-        g2.drawString("Shield", textX, textY);
-        textY += lineHeight;
+        g2.drawString("Level", textX, textY);textY += lineHeight;        
+        g2.drawString("Life", textX, textY);textY += lineHeight;     
+        g2.drawString("Mana", textX, textY);textY += lineHeight;     
+        g2.drawString("Strength", textX, textY);textY += lineHeight;       
+        g2.drawString("Dexterity", textX, textY);textY += lineHeight;      
+        g2.drawString("Attack", textX, textY);textY += lineHeight;
+        g2.drawString("Defense", textX, textY);textY += lineHeight;
+        g2.drawString("Exp", textX, textY);textY += lineHeight;
+        g2.drawString("Next Level", textX, textY);textY += lineHeight;
+        g2.drawString("Coin", textX, textY);textY += lineHeight+10;
+        g2.drawString("Weapon", textX, textY);textY += lineHeight + 15;
+        g2.drawString("Shield", textX, textY);textY += lineHeight;
         
         //VALUE
-        int tailX = (frameX + frameWidth);
+        int tailX = (frameX + frameWidth) - 30;
         //Reset textY
         textY = frameY + gp.tileSize;
         String value;
@@ -371,6 +382,11 @@ public class UI {
         g2.drawString(value, textX-10, textY);
         textY += lineHeight;
         
+        value = String.valueOf(gp.player.mana + "/" + gp.player.maxMana);
+        textX = getXforAlignToRightText(value, tailX);
+        g2.drawString(value, textX-10, textY);
+        textY += lineHeight;
+
         value = String.valueOf(gp.player.strength);
         textX = getXforAlignToRightText(value, tailX);
         g2.drawString(value, textX-10, textY);
@@ -407,9 +423,9 @@ public class UI {
         g2.drawString(value, textX-10, textY);
         textY += lineHeight;
         
-        g2.drawImage(gp.player.currentWeapon.down1, tailX-gp.tileSize, textY-15,null);
+        g2.drawImage(gp.player.currentWeapon.down1, tailX-gp.tileSize, textY-24,null);
         textY += gp.tileSize;
-        g2.drawImage(gp.player.currentShield.down1, tailX-gp.tileSize, textY-15, null);
+        g2.drawImage(gp.player.currentShield.down1, tailX-gp.tileSize, textY-24, null);
     }
     public void drawInventory() {
         // FRAME

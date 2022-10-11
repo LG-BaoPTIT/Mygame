@@ -1,5 +1,6 @@
 package object;
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -9,6 +10,7 @@ public class OBJ_FireBall extends Projectile
     public OBJ_FireBall(GamePanel gp) {
         super(gp);
         this.gp=gp;
+
         name = "FireBall";
         speed = 5;
         maxLife = 80;
@@ -29,5 +31,14 @@ public class OBJ_FireBall extends Projectile
         right1 = setup("/projectile/fireball_right_1",gp.tileSize, gp.tileSize);
         right2 = setup("/projectile/fireball_right_2",gp.tileSize, gp.tileSize);
     }
-    
+    public boolean haveResource(Entity user){
+        boolean haveResource = false;
+        if(user.mana >= useCost){
+            haveResource = true;
+        }
+        return haveResource;
+    }
+    public void suptractResource(Entity user){
+        user.mana -= useCost;
+    }
 }

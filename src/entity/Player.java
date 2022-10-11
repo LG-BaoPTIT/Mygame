@@ -17,6 +17,7 @@ import main.KeyHandler;
 import main.UtilityTool;
 import object.OBJ_FireBall;
 import object.OBJ_Key;
+import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -68,6 +69,9 @@ public class Player extends Entity {
         level = 1;
         maxLife = 6;
         life = maxLife;
+        maxMana =4;
+        mana = maxMana;
+        ammo = 10;
         strength = 1;//the more strength he has, the more damage he gives
         dexterity = 1;// the more dexterity he has, the less damage he receives
         exp = 0;
@@ -76,6 +80,7 @@ public class Player extends Entity {
         currentWeapon = new OBJ_Sword_Normal(gp);// the total attack value is decided by strength and weapon
         currentShield = new OBJ_Shield_Wood(gp);// the total defense value is decided by dexterity and shield
         projectile = new OBJ_FireBall(gp);
+        //projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
     }
@@ -131,7 +136,7 @@ public class Player extends Entity {
     public void update() {
         
         if (attacking == true) {
-            attack();
+            attacking();
         } else if (keyH.upPressed == true || keyH.downPressed
                 || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {  
             if (keyH.upPressed == true) {
@@ -210,11 +215,12 @@ public class Player extends Entity {
             }
         }
         
-        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30){
+        if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && projectile.haveResource(this) == true){
             //SET DEFAULT COORDINATES, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
-            // ADD TO ARRAYLIST
-            
+            //SUBTRACT THE COST(MANA, AMO, ECT)
+            projectile.suptractResource(this);
+            // ADD TO ARRAYLIST           
             gp.projectileList.add(projectile);
             shotAvailableCounter = 0;
             
@@ -233,7 +239,7 @@ public class Player extends Entity {
             shotAvailableCounter++;
         }
     }
-    public void attack() {
+    public void attacking() {
         spriteCounter++;
         if (spriteCounter <= 5) {
             spriteNum = 1;
