@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.OBJ_Axe;
 import object.OBJ_FireBall;
 import object.OBJ_Key;
 import object.OBJ_Rock;
@@ -78,6 +79,7 @@ public class Player extends Entity {
         nextLevelExp = 5;
         coin = 0;
         currentWeapon = new OBJ_Sword_Normal(gp);// the total attack value is decided by strength and weapon
+        currentWeapon = new OBJ_Axe(gp);
         currentShield = new OBJ_Shield_Wood(gp);// the total defense value is decided by dexterity and shield
         projectile = new OBJ_FireBall(gp);
         //projectile = new OBJ_Rock(gp);
@@ -156,7 +158,7 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-//                CHECK OBJECT COLLISION
+            //CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
@@ -164,11 +166,12 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
-//                CHECK MONSTER COLLISION
+            //CHECK MONSTER COLLISION
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
-
-//                CHECK EVENT
+            //CHECK INTERACTIVE TILE COLLISION
+            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+            //CHECK EVENT
             gp.eHandler.checkEvent();
 
             // IF COLLISION = FALSE ,PLAYER CAN MOVE 
@@ -190,7 +193,7 @@ public class Player extends Entity {
             }
             
             if(keyH.enterPressed == true && attackCanceled == false) {
-                gp.playSE(7);
+                //gp.playSE(7);
                 attacking = true;
                 spriteCounter = 0;
             }
@@ -278,6 +281,9 @@ public class Player extends Entity {
             //check monster collision with the updated worldX,worldY and solidArea
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             damageMonster(monsterIndex,attack);
+
+            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+            damageInteractiveTile(iTileIndex);
             // after checking collision restore the origin data
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -361,7 +367,18 @@ public class Player extends Entity {
             }
         }
     }
-    
+    public void damageInteractiveTile(int i){
+        if(i != 999 && gp.iTile[i].destructible == true && 
+            gp.iTile[i].isCorrectItem(this) && gp.iTile[i].invincible == false){
+            gp.iTile[i].playSE();
+            gp.iTile[i].life--;
+            gp.iTile[i].invincible = true;
+
+            if(gp.iTile[i].life == 0){
+                 gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+            }
+        }
+    }
     public void checkLevelUp(){
         if(exp >= nextLevelExp){
             level++;

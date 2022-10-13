@@ -12,33 +12,34 @@ import entity.Entity;
 import entity.Player;
 
 import tile.TileManager;
+import tile_interactive.InteractiveTile;
 
 // inherited JPanel
 //12345132132
 public class GamePanel extends JPanel implements Runnable{
-	//Screen setting
-	final int originalTileSize = 16; //16*16
-	final int scale = 3;  
-	public final int tileSize = originalTileSize*scale;// 48*48
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 12;
-	public final int screenWidth = tileSize*maxScreenCol; //768px
-	public final int screenHeight = tileSize*maxScreenRow; //576px
+	    //Screen setting
+	    final int originalTileSize = 16; //16*16
+	    final int scale = 3;  
+	    public final int tileSize = originalTileSize*scale;// 48*48
+	    public final int maxScreenCol = 16;
+	    public final int maxScreenRow = 12;
+	    public final int screenWidth = tileSize*maxScreenCol; //768px
+	    public final int screenHeight = tileSize*maxScreenRow; //576px
 	
         //world setting
         public final int maxWorldCol = 50;
         public final int maxWorldRow = 50;
-//        public final int worldWidth = tileSize * maxWorldCol ;
-//	public final int worldHeight = tileSize * maxWorldRow ;
+        //public final int worldWidth = tileSize * maxWorldCol ;
+        //public final int worldHeight = tileSize * maxWorldRow ;
         //FPS
-	int FPS = 60;
+	    int FPS = 60;
 	
-	TileManager tileM = new TileManager(this);
+	    TileManager tileM = new TileManager(this);
         public KeyHandler keyH = new KeyHandler(this);
         Sound music = new Sound();
         Sound se = new Sound();
 	
-	public CollisionChecker cChecker =new CollisionChecker(this);
+	    public CollisionChecker cChecker =new CollisionChecker(this);
         public AssetSetter aSetter = new AssetSetter(this);
         public UI ui = new UI(this);
         public EventHandler eHandler = new EventHandler(this);
@@ -47,18 +48,19 @@ public class GamePanel extends JPanel implements Runnable{
           
         public Player player = new Player(this,keyH);
         public Entity obj[] = new Entity[20];
-	public Entity npc[] = new Entity[10];
+	    public Entity npc[] = new Entity[10];
         public Entity monster[] = new Entity[20];
+        public InteractiveTile iTile[] = new InteractiveTile[50];
         public ArrayList<Entity> projectileList = new ArrayList<>();
         ArrayList<Entity> entityList = new ArrayList<>();
         
 	// GAME STATE
 	public int gameState;
-        public final int titleState = 0;
+    public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int dialogueState = 3;
-        public final int characterState = 4;
+    public final int characterState = 4;
 
 	public GamePanel() {
 		
@@ -77,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable{
             aSetter.setObject();
             aSetter.setNPC();
             aSetter.setMonster();
+            aSetter.setInteractiveTile();
 //            playMusic(0);
             gameState = titleState;
         }
@@ -151,6 +154,12 @@ public class GamePanel extends JPanel implements Runnable{
                                    projectileList.remove(i);
                             }
                         }
+                    
+                    }
+                    for(int i=0; i<iTile.length;i++){
+                        if(iTile[i]!=null){
+                            iTile[i].update();
+                        }
                     }
 		}
 		if(gameState == pauseState) {
@@ -170,41 +179,47 @@ public class GamePanel extends JPanel implements Runnable{
 		if(keyH.checkDrawTime == true){
 			drawStart = System.nanoTime();
 		}
-                //TITLE SCREEN
-                if(gameState == titleState) {
-                    ui.draw(g2);
+            //TITLE SCREEN
+            if(gameState == titleState) {
+                ui.draw(g2);
+            }
+            else {
+                //TILE
+                tileM.draw(g2);	
+                //INTERACTIVE TILE
+                for(int i=0;i<iTile.length;i++){
+                    if(iTile[i]!=null){
+                        iTile[i].draw(g2);
+                    }
                 }
-                else {
-                    //TILE
-                    tileM.draw(g2);		
-                    //ADD ENTITIES TO THE LIST
-                    entityList.add(player);
-                    for(int i=0;i<npc.length;i++){
+                //ADD ENTITIES TO THE LIST
+                entityList.add(player);
+                for(int i=0;i<npc.length;i++){
 			if(npc[i] != null){
-                            entityList.add(npc[i]);
+                entityList.add(npc[i]);
 			}
                     }
-                    for(int i=0;i<obj.length;i++){
-			if(obj[i] != null){
+            for(int i=0;i<obj.length;i++){
+			    if(obj[i] != null){
                             entityList.add(obj[i]);
-			}
-                    }
-                    for(int i=0;i<monster.length;i++){
-			if(monster[i] != null){
-                            entityList.add(monster[i]);
+			    }
+            }
+            for(int i=0;i<monster.length;i++){
+			    if(monster[i] != null){
+                    entityList.add(monster[i]);
                             
 			}
-                    }
+            }
                     
-                    for(int i=0;i<projectileList.size();i++){
-			if(projectileList.get(i) != null){
-                            entityList.add(projectileList.get(i));
-			}
-                    }
-                    //SORT
-                    Collections.sort(entityList, new Comparator<Entity>() {
-                    @Override
-                    public int compare(Entity e1, Entity e2){
+            for(int i=0;i<projectileList.size();i++){
+			    if(projectileList.get(i) != null){
+                    entityList.add(projectileList.get(i));
+			    }
+            }
+            //SORT
+            Collections.sort(entityList, new Comparator<Entity>() {
+            @Override
+            public int compare(Entity e1, Entity e2){
 			int result = Integer.compare(e1.worldY, e2.worldY);
                             return result;
                     }
