@@ -117,6 +117,40 @@ public class Entity {
             }
         }
     }
+    
+    public Color getPaticleColor(){
+        Color color = null;
+        return color;
+    }
+    public int getParticleSize(){
+        int size = 0; 
+        return size;
+    }
+    public int getParticalSpeed(){
+        int speed = 0;
+        return speed;
+    }
+    public int getParticleMaxLife(){
+        int maxLife = 0;
+        return maxLife;
+    }
+    public void generateParticle(Entity generator, Entity target){
+        Color color = generator.getPaticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticalSpeed();
+        int maxLife = generator.getParticleMaxLife();
+        
+        Particle p1 = new Particle(gp,generator, color, size,speed,maxLife,-2,-1);
+        Particle p2 = new Particle(gp,generator, color, size,speed,maxLife,2,-1);
+        Particle p3 = new Particle(gp,generator, color, size,speed,maxLife,-2,1);
+        Particle p4 = new Particle(gp,generator, color, size,speed,maxLife,2,1);
+        
+        gp.particleList.add(p1);
+        gp.particleList.add(p2);
+        gp.particleList.add(p3);
+        gp.particleList.add(p4);
+    }
+    
     public void update() {
 
         setAction();
@@ -182,7 +216,7 @@ public class Entity {
 
 
     }
-    public void draw(java.awt.Graphics2D g2) {
+    public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
 
