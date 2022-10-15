@@ -193,7 +193,7 @@ public class Player extends Entity {
             }
             
             if(keyH.enterPressed == true && attackCanceled == false) {
-                //gp.playSE(7);
+                gp.playSE(7);
                 attacking = true;
                 spriteCounter = 0;
             }
