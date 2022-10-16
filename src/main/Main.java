@@ -18,6 +18,11 @@ public class Main {
 		
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
+                
+                gamePanel.config.loadConfig();
+                if(gamePanel.fullScreenOn == true) {
+                    window.setUndecorated(true);
+                }
 		
 		// size the window to fit the preferred size of it subcomponent
 		// <=> GamePanel
