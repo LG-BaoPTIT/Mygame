@@ -4,10 +4,12 @@ package main;
 import javax.swing.JFrame;
 
 public class Main {
+    
+    public static JFrame window;
 
 	public static void main(String[] args) {
 
-		JFrame window = new JFrame();
+		window = new JFrame();
 		
 		//make a proper 'X' closing button
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,6 +18,11 @@ public class Main {
 		
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
+                
+                gamePanel.config.loadConfig();
+                if(gamePanel.fullScreenOn == true) {
+                    window.setUndecorated(true);
+                }
 		
 		// size the window to fit the preferred size of it subcomponent
 		// <=> GamePanel
