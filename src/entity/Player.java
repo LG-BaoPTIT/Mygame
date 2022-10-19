@@ -92,6 +92,9 @@ public class Player extends Entity {
     public void setDefaultPositions(){
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
+        //tam thoi
+        gp.currentMap = 0;// map 0
+       
         direction = "down";
     }
     public void restoreLifeAndMan(){
