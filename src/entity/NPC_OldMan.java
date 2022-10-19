@@ -2,8 +2,7 @@ package entity;
 
 import java.util.Random;
 
-import javax.swing.text.AbstractWriter;
-
+import java.awt.Rectangle;
 import main.GamePanel;
 
 public class NPC_OldMan extends Entity{
@@ -13,6 +12,14 @@ public class NPC_OldMan extends Entity{
 
         direction = "down";
         speed = 1;
+
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width =30;
+        solidArea.height = 30;
 
         getImage();
         setDialogue();
@@ -30,38 +37,50 @@ public class NPC_OldMan extends Entity{
         
 	}
     public void setDialogue(){
-        dialogues[0] = "Hello, mayconvo.";
+        dialogues[0] = "Hello, AVENTURE.";
         dialogues[1] = "So you've come to this island to\nfind the treasure?";
         dialogues[2] = "I used to be a great nwizard but now... \nI'm a bit to old for taking an adventure.";
         dialogues[3] = "Well, good luck on you.";
 
     }
     public void setAction() {
+        if(onPath == true){
+            //int goalCol=12;
+            //int goalRow=9;
+            int goalCol=(gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+            int goalRow=(gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            searchPath( goalCol, goalRow);
 
-        actionLockCounter ++;
+        }
+        else {
+            actionLockCounter ++;
 
-        if(actionLockCounter == 120) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1;//pick up a number from 1 to 100
-
-            if( i <= 25) {
-                direction = "up";
-            }
-            if( i > 25 && i <= 50) {
-                direction = "down";
-            }
-            if(i > 50 && i <= 75) {
-                direction = "left";
+            if(actionLockCounter == 120) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1;//pick up a number from 1 to 100
+    
+                if( i <= 25) {
+                    direction = "up";
+                }
+                if( i > 25 && i <= 50) {
+                    direction = "down";
+                }
+                if(i > 50 && i <= 75) {
+                    direction = "left";
+                } 
+                if(i>75 && i <= 100) {
+                    direction = "right";
+                }
+    
+                actionLockCounter = 0;
             } 
-            if(i>75 && i <= 100) {
-                direction = "right";
-            }
+        }
 
-            actionLockCounter = 0;
-        } 
     }
     public void speak(){
         //Do this character specific stuff
         super.speak();
+        onPath = true;
+
     }
 }
