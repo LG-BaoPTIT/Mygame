@@ -17,6 +17,7 @@ import main.KeyHandler;
 import main.UtilityTool;
 import object.OBJ_Axe;
 import object.OBJ_FireBall;
+import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
@@ -108,7 +109,9 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        //inventory.add(new OBJ_Sword_Normal(gp));
+        inventory.add(new OBJ_Sword_Normal(gp));
+        inventory.add(new OBJ_Heart(gp));
+
     }
     public int getAttack() {
         attackArea = currentWeapon.attackArea;
