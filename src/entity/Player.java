@@ -108,23 +108,6 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new OBJ_Axe(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
         //inventory.add(new OBJ_Sword_Normal(gp));
     }
     public int getAttack() {
@@ -367,9 +350,7 @@ public class Player extends Entity {
             //INVENTORY ITEMS
             else {
                  String text;
-                if(inventory.size() != maxInventorySize) {
-                
-                    inventory.add(gp.obj[gp.currentMap][i]);
+                if(canObtainItem(gp.obj[gp.currentMap][i])) {
                     gp.playSE(1);
                     text  = "Got a " + gp.obj[gp.currentMap][i].name + "!";
                 }
@@ -488,11 +469,53 @@ public class Player extends Entity {
             }
             if(selectedItem.type == type_consumable) {
                 if(selectedItem.use(this) == true) {
-                    inventory.remove(itemIndex);
+                    if(selectedItem.amount>1){
+                        selectedItem.amount--;
+                    }
+                    else
+                        inventory.remove(itemIndex);
                 }
             }
         }
     }
+    public boolean canObtainItem(Entity item){
+        boolean canObtain = false;
+        // check if item is stackable
+        if(item.stackable == true){
+            
+            int index = searchItemInInventory(item.name);
+            if(index!=999){ // already have this item
+                inventory.get(index).amount++;
+                canObtain = true;
+            }
+            else{ //new item
+                if(inventory.size()!=maxInventorySize){ // check vacancy
+                    inventory.add(item);
+                    canObtain = true;
+                }
+                
+            }
+        }
+        else{// if not stackable
+            if(inventory.size()!=maxInventorySize){ // check vacancy
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
+    }
+    public int searchItemInInventory(String itemName){
+        int itemIndex = 999;
+        for (int i=0;i<inventory.size();i++){
+            if(inventory.get(i).name.equals(itemName))
+                {
+                    itemIndex = i;
+                    break;
+                }
+        }
+        return itemIndex;
+    }
+
     public void draw(Graphics2D g2) {
 //		g2.setColor(Color.green);
 //		//draw a rectangle and paint with the chosen color 
