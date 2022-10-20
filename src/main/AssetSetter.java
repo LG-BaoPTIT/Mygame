@@ -140,12 +140,22 @@ public class AssetSetter {
         gp.iTile[mapNum][i] = new IT_DryTree(gp,30,20); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,30,21); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,30,22); i++;
+        
+        gp.iTile[mapNum][i] = new IT_DryTree(gp,20,22); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,20,20); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,20,21); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,20,24); i++;
+        
         gp.iTile[mapNum][i] = new IT_DryTree(gp,22,24); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,23,24); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,24,24); i++;
+
+        gp.iTile[mapNum][i] = new IT_DryTree(gp,25,30); i++;
+        gp.iTile[mapNum][i] = new IT_DryTree(gp,26,30); i++;
+        gp.iTile[mapNum][i] = new IT_DryTree(gp,27,30); i++;
+        gp.iTile[mapNum][i] = new IT_DryTree(gp,28,30); i++;
+        gp.iTile[mapNum][i] = new IT_DryTree(gp,29,30); i++;
+        gp.iTile[mapNum][i] = new IT_DryTree(gp,30,30); i++;
+        
     }
     
 }
