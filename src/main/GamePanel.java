@@ -13,6 +13,8 @@ import java.util.*;
 import java.io.*;
 import entity.Entity;
 import entity.Player;
+import environment.EnvironmentManager;
+
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
@@ -60,9 +62,11 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
-    Config config = new Config(this);
+    Config config = new Config(this);  
     public PathFinder pFinder = new PathFinder(this);
+    EnvironmentManager eManager = new EnvironmentManager(this);
     Thread gameThread;
+
     //ENTITY AND OBJECT
 
     public Player player = new Player(this, keyH);
@@ -103,8 +107,9 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
-        aSetter.setMonster();
+       //aSetter.setMonster();
         aSetter.setInteractiveTile();
+        eManager.setup();
         gameState = titleState;
         
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
@@ -299,6 +304,8 @@ public class GamePanel extends JPanel implements Runnable {
             }
             //EMPTY ENTITY LIST
             entityList.clear();
+            //ENVIRONMENT
+            eManager.draw(g2);
             //UI
             ui.draw(g2);
         }
