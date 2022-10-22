@@ -5,17 +5,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.Buffer;
-import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import entity.Entity;
 import java.util.ArrayList;
-import object.OBJ_Key;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Coin_Bronze;
 /**
@@ -488,7 +481,7 @@ public class UI {
             
             //EQIP CURROR
             if(entity.inventory.get(i) == entity.currentWeapon ||
-                    entity.inventory.get(i) == entity.currentShield) {
+                    entity.inventory.get(i) == entity.currentShield || entity.inventory.get(i)==entity.currentLight) {
                 g2.setColor(new Color(240,190,90));
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
             }

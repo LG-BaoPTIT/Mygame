@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import ai.PathFinder;
 
 import java.util.*;
-import java.io.*;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
@@ -107,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
-       //aSetter.setMonster();
+        aSetter.setMonster();
         aSetter.setInteractiveTile();
         eManager.setup();
         gameState = titleState;
@@ -238,6 +237,7 @@ public class GamePanel extends JPanel implements Runnable {
                     iTile[currentMap][i].update();
                 }
             }
+            eManager.update();
         }
         if (gameState == pauseState) {
             // nothing

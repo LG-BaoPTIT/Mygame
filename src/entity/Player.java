@@ -1,25 +1,15 @@
 package entity;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.Buffer;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
 import main.GamePanel;
 import main.KeyHandler;
-import main.UtilityTool;
 import object.OBJ_Axe;
 import object.OBJ_FireBall;
 import object.OBJ_Heart;
-import object.OBJ_Key;
-import object.OBJ_Rock;
+
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -32,6 +22,7 @@ public class Player extends Entity {
 
     int standCounter = 0;
     public boolean attackCanceled = false;
+    public boolean lightUpdated = false;
     private int invincibleCounter;
     boolean invincible;
 
@@ -469,6 +460,15 @@ public class Player extends Entity {
             if(selectedItem.type == type_shiled) {
                 currentShield = selectedItem;
                 defense = getDefense();
+            }
+            if(selectedItem.type == tipe_light){
+                if(currentLight == selectedItem){
+                    currentLight = null;               
+                }
+                else {
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
             }
             if(selectedItem.type == type_consumable) {
                 if(selectedItem.use(this) == true) {

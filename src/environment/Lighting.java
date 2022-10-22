@@ -4,6 +4,7 @@ import java.awt.geom.*;
 import java.awt.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.security.PublicKey;
 import java.security.cert.X509CRLEntry;
 
 import main.GamePanel;
@@ -13,25 +14,26 @@ public class Lighting {
     GamePanel gp;
     BufferedImage darknessFilter;
 
-    public Lighting(GamePanel gp, int circleSize) {
+    public Lighting(GamePanel gp) {
+        this.gp=gp;
+        setLightSource();
 
+
+    }
+    public void setLightSource(){
+        
         // Create a buffered image
         darknessFilter = new BufferedImage(gp.screenWidth, gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = (Graphics2D)darknessFilter.getGraphics();
-        // Create a screen_sized rectangle area
-        Area screenArea = new Area(new Rectangle2D.Double(0,0,gp.screenWidth,gp.screenHeight));
-        // Get the center x and y of the light circle
+        //
+        if(gp.player.currentLight == null){
+            g2.setColor(new Color(0,0,0,0.98f));
+        }
+        else {
+                    // Get the center x and y of the light circle
         int centerX = gp.player.screenX +(gp.tileSize)/2;
         int centerY = gp.player.screenY +(gp.tileSize)/2;
-        // Get the top left x and y of the light circle
-        double x = centerX - (circleSize/2);
-        double y = centerY - (circleSize/2);
-        // Create a liight circle shape
-        Shape circleShape = new Ellipse2D.Double(x,y,circleSize,circleSize);
-        //Create a light circle area
-        Area lightArea = new Area(circleShape);
-        //Subtract the light circle from the screen rectangle
-        screenArea.subtract(lightArea);
+
         
         //Create a gradation effect within the light circle
         Color color[] = new Color[12];
@@ -62,19 +64,22 @@ public class Lighting {
         fraction[10] = 0.95f;
         fraction[11] = 1f;
 
-
         // Create a gradation pain setting for the light circle
-        RadialGradientPaint gPaint = new RadialGradientPaint(centerX,centerY,(circleSize/2),fraction,color);
+        RadialGradientPaint gPaint = new RadialGradientPaint(centerX,centerY,gp.player.currentLight.lightRadius,fraction,color);
         //Set the gradient data on g2
         g2.setPaint(gPaint);
-        //Draw the light circle
-        g2.fill(lightArea);
-        //Set a color (black) to the rectangle
-        // g2.setColor(new Color(0,0,0,0.95F));
-        //Draw the screen rectangle without the light circle area
-        g2.fill(screenArea);
-        g2.dispose();
 
+        }
+
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        g2.dispose();
+    }
+    public void update(){
+        if(gp.player.lightUpdated==true){
+            setLightSource();
+            gp.player.lightUpdated = false;
+        }
     }
     public void draw(Graphics2D g2){
         g2.drawImage(darknessFilter,0,0,null);
