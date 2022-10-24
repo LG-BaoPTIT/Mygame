@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import tile.Map;
 import javax.swing.JPanel;
 
 import ai.PathFinder;
@@ -64,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
     Config config = new Config(this);  
     public PathFinder pFinder = new PathFinder(this);
     EnvironmentManager eManager = new EnvironmentManager(this);
+    Map map = new Map(this);
     Thread gameThread;
 
     //ENTITY AND OBJECT
@@ -90,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int transitionState = 7;
     public final int tradeState = 8;
     public final int sleepState = 9;
-
+    public final int mapState =10;
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -253,7 +254,12 @@ public class GamePanel extends JPanel implements Runnable {
         //TITLE SCREEN
         if (gameState == titleState) {
             ui.draw(g2);
-        } else {
+        } 
+        //MAP SCREEN
+        else if(gameState == mapState){
+            map.drawFullMapScreen(g2);
+        }
+        else {
             //TILE
             tileM.draw(g2);
             //INTERACTIVE TILE
@@ -307,6 +313,10 @@ public class GamePanel extends JPanel implements Runnable {
             entityList.clear();
             //ENVIRONMENT
             eManager.draw(g2);
+
+            //MINI MAP
+            map.drawMiniMap(g2);
+
             //UI
             ui.draw(g2);
         }

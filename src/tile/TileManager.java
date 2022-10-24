@@ -12,7 +12,7 @@ import javax.swing.plaf.ColorUIResource;
 
 import main.GamePanel;
 import main.UtilityTool;
-import tile.*;
+
 public class TileManager {
     
     GamePanel gp;
