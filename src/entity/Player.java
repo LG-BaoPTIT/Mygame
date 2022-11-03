@@ -47,10 +47,6 @@ public class Player extends Entity {
 
 
         setDefaultValues();
-        getImage();
-        getAttackImage();
-        getGuardImage();
-        setItems();
     }
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
@@ -76,25 +72,36 @@ public class Player extends Entity {
         coin = 500;
         currentWeapon = new OBJ_Sword_Normal(gp);// the total attack value is decided by strength and weapon
         currentWeapon = new OBJ_Axe(gp);
+        currentLight = null;
         currentShield = new OBJ_Shield_Wood(gp);// the total defense value is decided by dexterity and shield
         projectile = new OBJ_FireBall(gp);
         //projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
+
+        getImage();
+        getAttackImage();
+        getGuardImage();
+        setItems();
     }
     public void setDefaultPositions(){
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         //tam thoi
-        gp.currentMap = 0;// map 0
+        //gp.currentMap = 0;// map 0
        
         direction = "down";
     }
-    public void restoreLifeAndMan(){
+    public void restoreStatus(){
         life = maxLife;
         mana = maxMana;
         invincible = false;
         transparent = false;
+        attacking = false;
+        guarding = false;
+        knockBack = false;
+        lightUpdated = true;
+
     }
     // các vật phẩm có sẵn trong túi
     public void setItems() {
@@ -114,6 +121,24 @@ public class Player extends Entity {
     }
     public int getDefense() {
         return defense = dexterity*currentShield.defenseValue;
+    }
+    public int getCurrentWeaponSlot(){
+        int currentWeaponSlot = 0;
+        for(int i=0;i<inventory.size();i++){
+            if(inventory.get(i) == currentWeapon){
+                currentWeaponSlot = 1;
+            }
+        }
+        return currentWeaponSlot;
+    }
+    public int getCurrentShieldSlot(){
+        int currentShieldSlot = 0;
+        for(int i=0;i<inventory.size();i++){
+            if(inventory.get(i) == currentShield){
+                currentShieldSlot = 1;
+            }
+        }
+        return currentShieldSlot;
     }
     public void getImage() {
 
@@ -329,12 +354,12 @@ public class Player extends Entity {
         if(mana  > maxMana) {
             mana = maxMana;
         }
-        // if(life <=0 ){
-        //     gp.gameState = gp.gameOverState;
-        //     gp.ui.commandNum = -1;
-        //     gp.stopMusic();
-        //     gp.playSE(12);
-        // }
+        if(life <=0 ){
+            gp.gameState = gp.gameOverState;
+            gp.ui.commandNum = -1;
+            gp.stopMusic();
+            gp.playSE(12);
+        }
     }
     
     public void pickUpObject(int i) {

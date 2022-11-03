@@ -5,14 +5,11 @@ import main.GamePanel;
 public class OBJ_Chest extends Entity{
     
     GamePanel gp;
-    Entity loot;
-    boolean opened = false;
-    public OBJ_Chest(GamePanel gp, Entity loot) {
+
+    public OBJ_Chest(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        this.loot = loot;
-
-
+        
         type = type_obstacle;
         name = "Chest";
         image = setup("/objects/chest",gp.tileSize, gp.tileSize);
@@ -26,6 +23,9 @@ public class OBJ_Chest extends Entity{
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+    }
+    public void setLoot(Entity loot){
+        this.loot =loot;
     }
     public void interact() {
         gp.gameState = gp.dialogueState;

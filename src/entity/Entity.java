@@ -50,7 +50,8 @@ public class Entity {
     public boolean guarding  = false; 
     public boolean transparent = false;
     public boolean offBalance = false;
-
+    public Entity loot;
+    public boolean opened = false;
     //COUNTER
     public int spriteCounter = 0;
     public int actionLockCounter = 0;
@@ -84,7 +85,7 @@ public class Entity {
     public Entity currentShield;
     public Entity currentLight;
     public Projectile projectile;
-    
+
     //ITEM ATTIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
@@ -152,6 +153,7 @@ public class Entity {
         int goalRow=(target.worldY + target.solidArea.y)/gp.tileSize;   
         return goalRow;     
     }
+    public void setLoot(Entity loot){}
     public void setAction() {}
     public void damageReaction(){}
     public void speak() {
@@ -496,10 +498,13 @@ public class Entity {
                     setKnockBack(this, gp.player, knockBackPower);
                     offBalance = true;
                     spriteCounter -= 60;
-                }    
-                // Normal guard
-                damage /= 3;
-                gp.playSE(15);
+                } 
+                else{
+                    // Normal guard
+                    damage /= 3;
+                    gp.playSE(15);
+                }   
+                
 
             }
             else {
@@ -767,10 +772,10 @@ public class Entity {
         int nextWorldY = user.getToyY();
 
         switch(user.direction) {
-            case "up": nextWorldY = user.getToyY()-1;break;
-            case "down": nextWorldY = user.getBottomY()+1;break;
-            case "left": nextWorldX = user.getLeftX()-1;break;
-            case "right": nextWorldX = user.getRightX()+1;break;
+            case "up": nextWorldY = user.getToyY()-gp.player.speed;break;
+            case "down": nextWorldY = user.getBottomY()+gp.player.speed;break;
+            case "left": nextWorldX = user.getLeftX()-gp.player.speed;break;
+            case "right": nextWorldX = user.getRightX()+gp.player.speed;break;
         }
         int col = nextWorldX/gp.tileSize;
         int row = nextWorldY/gp.tileSize;
