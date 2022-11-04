@@ -26,12 +26,15 @@ public class OBJ_Potion_Red extends Entity{
         description = "[Red Potion]\nheals your life by " + value + ".";
         price = 25;
         stackable = true;
+        setDialogue();
+    }
+    public void setDialogue(){
+        dialogues[0][0] =  "You drink the " + name + "!\n"
+                    + "Your life has been recovered by " + value + ".";
+
     }
     public boolean use(Entity entity) {
-        
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "You drink the " + name + "!\n"
-            + "Your life has been recovered by " + value + ".";
+        startDialogue(this, 0);
         entity.life += value;
         gp.playSE(2);
         return true;

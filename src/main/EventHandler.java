@@ -6,7 +6,7 @@ public class EventHandler {
     
     GamePanel gp;
     EventRect eventRect[][][];
-    
+    Entity evenMaster;
     int previousEventX,previousEventY;
     boolean canTouchEvent = true;
     int tempMap, tempCol, tempRow;
@@ -14,7 +14,7 @@ public class EventHandler {
     
     public EventHandler(GamePanel gp) {
         this.gp = gp;
-        
+        evenMaster = new Entity(gp);
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
         int map = 0;
         int col  = 0;
@@ -38,8 +38,15 @@ public class EventHandler {
                 }
             }
         } 
+        setDialogue();
     }
-    
+    public void setDialogue(){
+        evenMaster.dialogues[0][0] = "You fall into a pit!";
+        evenMaster.dialogues[1][0] ="You drink the water.\nYour life and mana has been recovered,\n"
+        +"(The progress has been saved)";
+        evenMaster.dialogues[1][1] = "This is good water!I'm feel very strong!";
+
+    }
     public void checkEvent() {
         
 //        check if the player character is more than 1 tile away from the last event
@@ -92,7 +99,7 @@ public class EventHandler {
     public void damagePit(int gameState) {
         gp.gameState = gameState;
         gp.playSE(6);
-        gp.ui.currentDialogue = "You fall into a pit!";
+        evenMaster.startDialogue(evenMaster, 0);
         gp.player.life -= 1;
    
         canTouchEvent = false; 
@@ -102,8 +109,7 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(2);
-            gp.ui.currentDialogue = "You drink the water.\nYour life and mana has been recovered,\n"
-                +"(The progress has been saved)";
+            evenMaster.startDialogue(evenMaster, 1);   
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
             gp.aSetter.setMonster();
