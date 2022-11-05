@@ -55,9 +55,9 @@ public class MON_GreenSlime extends Entity{
         right2 = setup("/monster/greenslime_down_2",gp.tileSize, gp.tileSize);
     }
     public void setAction() {
-        // int xDistance = Math.abs(worldX-gp.player.worldX);
-        // int yDistance = Math.abs(worldY-gp.player.worldY);
-        // int tileDistance =(xDistance + yDistance)/gp.tileSize;
+        int xDistance = Math.abs(worldX-gp.player.worldX);
+        int yDistance = Math.abs(worldY-gp.player.worldY);
+        int tileDistance =(xDistance + yDistance)/gp.tileSize;
         
         if(onPath == true){
             //check if it stops chasing

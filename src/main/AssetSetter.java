@@ -5,6 +5,7 @@ import entity.NPC_Merchant;
 import entity.NPC_OldMan;
 import monster.MON_GreenSlime;
 import monster.MON_Orc;
+import monster.MON_RedSlime;
 import object.OBJ_Axe;
 import object.OBJ_Chest;
 import object.OBJ_Coin_Bronze;
@@ -45,14 +46,27 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = gp.tileSize*19;
         gp.obj[mapNum][i].worldY = gp.tileSize*20;
         i++;
-        gp.obj[mapNum][i] = new OBJ_Door(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*14;
-        gp.obj[mapNum][i].worldY = gp.tileSize*28;
+        // Chọn vật phẩm trong rương(Chài khóa)
+        gp.obj[mapNum][i] = new OBJ_Chest(gp);
+        gp.obj[mapNum][i].setLoot(new OBJ_Key(gp));
+        gp.obj[mapNum][i].worldX = gp.tileSize*17;
+        gp.obj[mapNum][i].worldY = gp.tileSize*20;
         i++;
-        gp.obj[mapNum][i] = new OBJ_Door(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*12;
-        gp.obj[mapNum][i].worldY = gp.tileSize*12;
+        // Chọn vật phẩm trong rương(Máu))
+        gp.obj[mapNum][i] = new OBJ_Chest(gp);
+        gp.obj[mapNum][i].setLoot(new OBJ_Heart(gp));
+        gp.obj[mapNum][i].worldX = gp.tileSize*16;
+        gp.obj[mapNum][i].worldY = gp.tileSize*20;
         i++;
+
+        // gp.obj[mapNum][i] = new OBJ_Door(gp);
+        // gp.obj[mapNum][i].worldX = gp.tileSize*14;
+        // gp.obj[mapNum][i].worldY = gp.tileSize*28;
+        // i++;
+        // gp.obj[mapNum][i] = new OBJ_Door(gp);
+        // gp.obj[mapNum][i].worldX = gp.tileSize*12;
+        // gp.obj[mapNum][i].worldY = gp.tileSize*12;
+        // i++;
         gp.obj[mapNum][i] = new OBJ_Chest(gp);
         gp.obj[mapNum][i].setLoot(new OBJ_Key(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize*30;
@@ -102,9 +116,26 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldX = gp.tileSize*38;
         gp.monster[mapNum][i].worldY = gp.tileSize*42;
         i++;
+
         gp.monster[mapNum][i] = new MON_Orc(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*12;
         gp.monster[mapNum][i].worldY = gp.tileSize*33;
+        i++;
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*37;
+        gp.monster[mapNum][i].worldY = gp.tileSize*12;
+        i++;
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*38;
+        gp.monster[mapNum][i].worldY = gp.tileSize*11;
+        i++;
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*39;
+        gp.monster[mapNum][i].worldY = gp.tileSize*14;
+        i++;
+        gp.monster[mapNum][i] = new MON_RedSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*39;
+        gp.monster[mapNum][i].worldY = gp.tileSize*16;
         i++;
         // mapNum = 1;
         // gp.monster[mapNum][i] = new MON_GreenSlime(gp);
@@ -126,17 +157,17 @@ public class AssetSetter {
         gp.iTile[mapNum][i] = new IT_DryTree(gp,31,12); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,32,12); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,33,12); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,30,20); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,30,21); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,30,22); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,30,20); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,30,21); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,30,22); i++;
         
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,20,22); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,20,20); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,20,21); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,20,22); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,20,20); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,20,21); i++;
         
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,22,24); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,23,24); i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp,24,24); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,22,24); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,23,24); i++;
+        // gp.iTile[mapNum][i] = new IT_DryTree(gp,24,24); i++;
 
         gp.iTile[mapNum][i] = new IT_DryTree(gp,25,30); i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp,26,30); i++;
