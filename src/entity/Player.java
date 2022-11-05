@@ -485,7 +485,9 @@ public class Player extends Entity {
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            
+            // dialogues[0][0]= "You are level " + level + " now!\n"
+            //     +"You feel stronger!";
+            setDialogue();
             startDialogue(this, 0);
         }
     }
@@ -526,17 +528,20 @@ public class Player extends Entity {
     }
     public boolean canObtainItem(Entity item){
         boolean canObtain = false;
+
+        Entity newItem = gp.eGenerator.getObject(item.name);
+
         // check if item is stackable
-        if(item.stackable == true){
+        if(newItem.stackable == true){
             
-            int index = searchItemInInventory(item.name);
+            int index = searchItemInInventory(newItem.name);
             if(index!=999){ // already have this item
                 inventory.get(index).amount++;
                 canObtain = true;
             }
             else{ //new item
                 if(inventory.size()!=maxInventorySize){ // check vacancy
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
                 
@@ -544,7 +549,7 @@ public class Player extends Entity {
         }
         else{// if not stackable
             if(inventory.size()!=maxInventorySize){ // check vacancy
-                inventory.add(item);
+                inventory.add(newItem);
                 canObtain = true;
             }
         }
