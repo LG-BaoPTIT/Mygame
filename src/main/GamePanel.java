@@ -136,6 +136,7 @@ public class GamePanel extends JPanel implements Runnable {
         
     }
     public void resetGame(boolean restart){
+        currentArea = outside;
         player.setDefaultPositions();
         player.restoreStatus();
         player.resetCounter();
@@ -339,6 +340,7 @@ public class GamePanel extends JPanel implements Runnable {
             g2.setColor(Color.white);
             g2.drawString("Draw Time" + passed, 10, 400);
             System.out.println("Draw Time:" + passed);
+            g2.drawString("God Mode " + keyH.godModeOn, 10,400);
         }
     }
     public void drawToScreen() {

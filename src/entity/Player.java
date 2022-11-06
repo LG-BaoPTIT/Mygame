@@ -4,14 +4,12 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
 import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_Axe;
 import object.OBJ_FireBall;
-import object.OBJ_Heart;
 import object.OBJ_Key;
-import object.OBJ_Lantern;
-import object.OBJ_Pickaxe;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -88,6 +86,7 @@ public class Player extends Entity {
         setDialogue();
     }
     public void setDefaultPositions(){
+        gp.currentMap = 0;
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         direction = "down";
@@ -114,12 +113,11 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new OBJ_Sword_Normal(gp));
-        inventory.add(new OBJ_Heart(gp));
         inventory.add(new OBJ_Key(gp));
 
         //tamthoi
-        inventory.add(new OBJ_Pickaxe(gp));
-        inventory.add(new OBJ_Lantern(gp));
+        // inventory.add(new OBJ_Pickaxe(gp));
+        // inventory.add(new OBJ_Lantern(gp));
 
     }
     public int getAttack() {
@@ -373,11 +371,13 @@ public class Player extends Entity {
         if(mana  > maxMana) {
             mana = maxMana;
         }
-        if(life <=0 ){
-            gp.gameState = gp.gameOverState;
-            gp.ui.commandNum = -1;
-            gp.stopMusic();
-            gp.playSE(12);
+        if (keyH.godModeOn == false){
+            if(life <=0 ){
+                gp.gameState = gp.gameOverState;
+                gp.ui.commandNum = -1;
+                gp.stopMusic();
+                gp.playSE(12);
+            }
         }
     }
     
