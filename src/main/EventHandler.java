@@ -59,13 +59,13 @@ public class EventHandler {
           if(canTouchEvent==true) {
             if(hit(0,27,16,"right")==true) {damagePit(gp.dialogueState);}
             else if(hit(0,23,12,"up")==true) { healingPool(gp.dialogueState);}
-            else if(hit(0,10,39,"any") == true){teleport(1,12,13);}// đến merchant's house
-            else if(hit(1,12,13,"any") == true){teleport(0,10,39);}// ra ngoài
+            else if(hit(0,10,39,"any") == true){teleport(1,12,13,gp.indoor);}// đến merchant's house
+            else if(hit(1,12,13,"any") == true){teleport(0,10,39,gp.outside);}// ra ngoài
             else if(hit(1,12,9,"up") == true){speak(gp.npc[1][0]);}
-            else if(hit(0, 12, 9, "any") == true) {teleport(2, 9, 41);}// đến chỗ của boss
-            else if(hit(2, 9, 41, "any") == true) {teleport(0, 12, 9);}// ra ngoài
-            else if(hit(2, 8, 7, "any") == true) {teleport(3,26,41);}// đến B2
-            else if(hit(3,26,41, "any") == true) {teleport(2,8,7);}// đến chỗ của boss
+            else if(hit(0, 12, 9, "any") == true) {teleport(2, 9, 41, gp.dungeon);}// đến chỗ của boss
+            else if(hit(2, 9, 41, "any") == true) {teleport(0, 12, 9, gp.outside);}// ra ngoài
+            else if(hit(2, 8, 7, "any") == true) {teleport(3,26,41, gp.dungeon);}// đến B2
+            else if(hit(3,26,41, "any") == true) {teleport(2,8,7, gp.dungeon);}// đến chỗ của boss
         }
     }
     public boolean hit(int map, int col, int row, String reqDirection) {
@@ -91,13 +91,7 @@ public class EventHandler {
         }
         return hit;
     }
-    //dich chuyen 
-//    public void teleport(int gameState) {
-//        gp.gameState  = gameState;
-//        gp.ui.currentDialogue = "Teleport!";
-//        gp.player.worldX = gp.tileSize*37;
-//        gp.player.worldY = gp.tileSize*10;
-//    }
+    
     public void damagePit(int gameState) {
         gp.gameState = gameState;
         gp.playSE(6);
@@ -118,8 +112,10 @@ public class EventHandler {
             gp.saveLoad.save();
         }
     }
-    public void teleport(int map, int col, int row){
+    public void teleport(int map, int col, int row, int area){
         gp.gameState = gp.transitionState;
+        gp.nextArea = area;
+        
         tempMap = map;
         tempCol = col;
         tempRow = row;

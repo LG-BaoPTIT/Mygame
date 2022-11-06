@@ -837,11 +837,11 @@ public class UI {
             }
         }
     }
-    public void drawTransition(){
+    public void drawTransition(){ // qúa trình chuyển đổi được thực hiên
         counter++;
         g2.setColor(new Color(0,0,0,counter*5));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-        if(counter == 50){
+        if(counter == 50){ 
             counter = 0;
             gp.gameState = gp.playState;
             gp.currentMap = gp.eHandler.tempMap;
@@ -849,6 +849,9 @@ public class UI {
             gp.player.worldY = gp.eHandler.tempRow*gp.tileSize;
             gp.eHandler.previousEventX = gp.player.worldX;
             gp.eHandler.previousEventY = gp.player.worldY;
+            gp.changeArea();
+        
+        
         }
     }
 
@@ -1038,14 +1041,7 @@ public class UI {
         g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
-//    public void drawPauseScreen() {
-//
-//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
-//        String text = "PAUSED";
-//        int x = getXforCenteredText(text);
-//        int y = gp.screenHeight/2;
-//        g2.drawString(text, x, y);
-//    }
+
     public int getXforCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
