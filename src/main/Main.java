@@ -23,7 +23,7 @@ public class Main {
                 if(gamePanel.fullScreenOn == true) {
                     window.setUndecorated(true);
                 }
-
+ 
 		// size the window to fit the preferred size of it subcomponent
 		// <=> GamePanel
 		window.pack();
