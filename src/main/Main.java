@@ -1,6 +1,7 @@
 package main;
 //hai con than lan con ahihi
 //1234
+//1234
 import javax.swing.JFrame;
 
 public class Main {
