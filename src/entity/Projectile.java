@@ -1,6 +1,5 @@
 package entity;
 
-import javax.imageio.ImageIO;
 import main.GamePanel;
 
 public class Projectile extends Entity{

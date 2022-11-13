@@ -6,26 +6,21 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import tile.Map;
 import javax.swing.JPanel;
-
 import ai.PathFinder;
 import data.SaveLoad;
-
 import java.util.*;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
-
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
-
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
-// inherited JPanel
-//12345132132
+
 public class GamePanel extends JPanel implements Runnable {
-    //Screen setting
+    //Thiết lập màn hình
 
     final int originalTileSize = 16; //16*16
     final int scale = 3;
@@ -35,14 +30,14 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; //960px
     public final int screenHeight = tileSize * maxScreenRow; //576px
 
-    //world setting
+    //Thiết lập thế giới 
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 10;
     public int currentMap = 0;
-    //tam thoi
     
-    //FOR FULL SCREEN
+    
+    //Cho ful màn hình
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
@@ -53,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     //FPS
     int FPS = 60;
     
-    // SYSTEM
+    // Hệ thống
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();

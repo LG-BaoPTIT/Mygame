@@ -1,9 +1,7 @@
 package tile_interactive;
 
 import entity.Entity;
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 

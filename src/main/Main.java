@@ -1,38 +1,32 @@
 package main;
-//hai con than lan con ahihi
-//1234
-//1234
 import javax.swing.JFrame;
 
 public class Main {
 
     public static JFrame window;
-
 	public static void main(String[] args) {
 
 		window = new JFrame();
-
-		//make a proper 'X' closing button
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Dòng code tr
 		window.setResizable(false);
-		window.setTitle("2D Adventure");
+		window.setTitle("2D Adventure");// Thay đổi tiêu đề của cửa sổ 
 
 		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
-
-                gamePanel.config.loadConfig();
-                if(gamePanel.fullScreenOn == true) {
-                    window.setUndecorated(true);
-                }
+		window.add(gamePanel); // thêm gamePanel vào cửa sổ 
+        gamePanel.config.loadConfig();
+		// 
+        if(gamePanel.fullScreenOn == true) { // nếu ấn vào nút fullScreen thì 
+            window.setUndecorated(true);// Tạo khung tràn viền của màn hình
+        }
  
-		// size the window to fit the preferred size of it subcomponent
+		// kích thước khung để phù hợp với kích thước ưu thích của thành phần phụ
 		// <=> GamePanel
 		window.pack();
 
-		// not specify the position of the window <==> the window is
-		// centered on screen
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
+		
+		
+		window.setLocationRelativeTo(null);// hiển thị của sổ lên chính giữa màn hình
+		window.setVisible(true);// thiết lập khả năng hiện thị của thành phần 
 
         gamePanel.setupGame();
 		gamePanel.startGameThread();

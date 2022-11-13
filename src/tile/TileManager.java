@@ -1,19 +1,12 @@
 package tile;
 
 import java.awt.Graphics2D;
-import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.concurrent.ArrayBlockingQueue;
-
 import javax.imageio.ImageIO;
-import javax.swing.plaf.ColorUIResource;
-
 import main.GamePanel;
 import main.UtilityTool;
 
