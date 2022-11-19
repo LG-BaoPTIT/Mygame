@@ -37,16 +37,14 @@ public class NPC_OldMan extends Entity{
         
 	}
     public void setDialogue(){
-        dialogues[0] = "Hello, AVENTURE.";
-        dialogues[1] = "So you've come to this island to\nfind the treasure?";
-        dialogues[2] = "I used to be a great nwizard but now... \nI'm a bit to old for taking an adventure.";
-        dialogues[3] = "Well, good luck on you.";
+        dialogues[0] = "Xin chao ke phieu luu.";
+        dialogues[1] = "Cau den hon dao nay de\ntim kho bau sao?";
+        dialogues[2] = "Ta la mot phap su... \nNhung qua gia de mao hiem lan nua.";
+        dialogues[3] = "Chuc may man.";
 
     }
     public void setAction() {
         if(onPath == true){
-            //int goalCol=12;
-            //int goalRow=9;
             int goalCol=(gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
             int goalRow=(gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
             searchPath( goalCol, goalRow);
@@ -57,7 +55,7 @@ public class NPC_OldMan extends Entity{
 
             if(actionLockCounter == 120) {
                 Random random = new Random();
-                int i = random.nextInt(100) + 1;//pick up a number from 1 to 100
+                int i = random.nextInt(100) + 1;// ngau nhien chon 1 so 1 -> 100
     
                 if( i <= 25) {
                     direction = "up";
@@ -78,9 +76,7 @@ public class NPC_OldMan extends Entity{
 
     }
     public void speak(){
-        //Do this character specific stuff
         super.speak();
         onPath = true;
-
     }
 }

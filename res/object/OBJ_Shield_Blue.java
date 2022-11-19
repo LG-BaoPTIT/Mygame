@@ -15,10 +15,10 @@ public class OBJ_Shield_Blue extends Entity{
      public OBJ_Shield_Blue(GamePanel gp) {
         super(gp);
         type = type_shiled;
-        name = "Blue Shield";
+        name = "Khien Xanh";
         down1 = setup("/objects/shield_blue",gp.tileSize,gp.tileSize);
         defenseValue = 2;
-        description = "[" + name + "]\nA shiny blue shiled.";
+        description = "[" + name + "]\nMot chiec khien sang bong";
         price = 80;
     }
     

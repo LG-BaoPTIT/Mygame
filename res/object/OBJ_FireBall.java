@@ -13,7 +13,7 @@ public class OBJ_FireBall extends Projectile {
         super(gp);
         this.gp = gp;
 
-        name = "FireBall";
+        name = "Qua cau lua";
         speed = 5;
         maxLife = 80;
         life = maxLife;

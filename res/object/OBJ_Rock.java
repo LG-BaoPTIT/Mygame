@@ -8,7 +8,7 @@ public class OBJ_Rock extends Projectile{
     public OBJ_Rock(GamePanel gp) {
         super(gp);
         this.gp=gp;
-        name = "Rock";
+        name = "Cuc da";
         speed = 8;
         maxLife = 80;
         life = maxLife;

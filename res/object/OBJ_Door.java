@@ -6,7 +6,7 @@ public class OBJ_Door extends Entity{
     
     public OBJ_Door(GamePanel gp) {
         super(gp);
-        name = "Door";
+        name = "Canh cua";
         down1 = setup("/objects/door",gp.tileSize, gp.tileSize);       
         collision  = true;
 

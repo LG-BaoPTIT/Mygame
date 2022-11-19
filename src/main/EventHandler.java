@@ -42,7 +42,7 @@ public class EventHandler {
     
     public void checkEvent() {
         
-//        check if the player character is more than 1 tile away from the last event
+//        check xem nguoi choi da ra khoi vung trigger event hay chua
           int xDistance = Math.abs(gp.player.worldX - previousEventX);
           int ydistance = Math.abs(gp.player.worldY - previousEventY);
           int distance = Math.max(xDistance, ydistance);
@@ -82,17 +82,11 @@ public class EventHandler {
         }
         return hit;
     }
-    //dich chuyen 
-//    public void teleport(int gameState) {
-//        gp.gameState  = gameState;
-//        gp.ui.currentDialogue = "Teleport!";
-//        gp.player.worldX = gp.tileSize*37;
-//        gp.player.worldY = gp.tileSize*10;
-//    }
+    
     public void damagePit(int gameState) {
         gp.gameState = gameState;
         gp.playSE(6);
-        gp.ui.currentDialogue = "You fall into a pit!";
+        gp.ui.currentDialogue = "Ban dap phai bay gau";
         gp.player.life -= 1;
    
         canTouchEvent = false; 
@@ -102,7 +96,7 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(2);
-            gp.ui.currentDialogue = "You drink the water.\nYour life and mana has been recovered";
+            gp.ui.currentDialogue = "Uong nuoc tu dong suoi.\nMau va mana duoc hoi phuc.\nQuai vat da xuat hien tro lai";
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
             gp.aSetter.setMonster();

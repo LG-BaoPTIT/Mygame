@@ -20,17 +20,17 @@ public class OBJ_Potion_Red extends Entity{
         
         this.gp = gp;
         type = type_consumable;
-        name = "Red_Potion";
+        name = "Binh Mau";
         value = 5;
         down1 = setup("/objects/potion_red",gp.tileSize, gp.tileSize);
-        description = "[Red Potion]\nheals your life by " + value + ".";
+        description = "[Binh Mau]\nPhuc hoi " + value + " hp.";
         price = 25;
     }
     public void use(Entity entity) {
         
         gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "You drink the " + name + "!\n"
-            + "Your life has been recovered by " + value + ".";
+        gp.ui.currentDialogue = "Su dung " + name + "!\n"
+            + "Mau hoi: " + value + ".";
         entity.life += value;
         gp.playSE(2);
     }

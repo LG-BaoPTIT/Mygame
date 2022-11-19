@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package object;
 
 import entity.Entity;
@@ -20,7 +17,7 @@ public class OBJ_Coin_Bronze extends Entity{
         this.gp = gp;
         
         type = type_pickupOnly;
-        name = "Bronze Coin";
+        name = "Dong xu";
         value = 1;
         down1 = setup("/objects/coin_bronze",gp.tileSize,gp.tileSize);
     }

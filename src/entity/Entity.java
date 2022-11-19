@@ -11,7 +11,8 @@ import main.GamePanel;
 import main.UtilityTool;
 import java.awt.Graphics2D;
 import java.awt.Color;
-//This store player class,enemy class,Npc class
+
+//Class nay luu du lieu cua player,npc,...
 
 public class Entity {
 
@@ -19,7 +20,7 @@ public class Entity {
 
     public int speed;
 
-    //BufferedImage describes an image with an accessible buffer of image data
+    //BufferedImage luu du lieu cua hinh anh
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2,
             attackRight1, attackRight2;
@@ -30,7 +31,7 @@ public class Entity {
     public boolean collision = false;
     String dialogues[] = new String[20];
 
-    //STATE
+    //Trang thai
     public int worldX, worldY;
     public String direction = "down";
     public int spriteNum = 1;
@@ -44,7 +45,7 @@ public class Entity {
     public boolean onPath = false;
     public boolean knockBack = false;
 
-    //COUNTER
+    //counter dem
     public int spriteCounter = 0;
     public int actionLockCounter = 0;
     public int invincibleCounter = 0;
@@ -52,7 +53,8 @@ public class Entity {
     int hpBarCounter = 0;
     public int shotAvailableCounter = 0;
     int knockBackCounter = 0;
-    //CHARACTER ATTRIBUTES
+
+    //Thuoc tinh nhan vat
     public String name;
     public int defaultSpeed;
     public int maxLife;
@@ -72,7 +74,7 @@ public class Entity {
     public Entity currentShield;
     public Projectile projectile;
     
-    //ITEM ATTIBUTES
+    //thuoc tinh vat pham
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
     public int value;
@@ -82,8 +84,9 @@ public class Entity {
     public int useCost;
     public int price;
     public int knockBackPower = 0;
-    // TYPE
-    public int type;// 0 = player, 1 - npc, 2 - monster
+
+    // Loai
+    public int type;// 0 = Nguoi choi, 1 - npc, 2 - quai vat
     public final int type_player = 0;
     public final int type_npc = 1;
     public final int type_monster = 2;
@@ -120,7 +123,7 @@ public class Entity {
         for( int i = 0; i < gp.obj[1].length; i++) {
             if(gp.obj[gp.currentMap][i] == null) {
                 gp.obj[gp.currentMap][i] = droppedItem;
-                gp.obj[gp.currentMap][i].worldX = worldX;// the dead monster's worldX
+                gp.obj[gp.currentMap][i].worldX = worldX;// ToadoX cua quai
                 gp.obj[gp.currentMap][i].worldY = worldY;
                 break;
             }
@@ -207,7 +210,7 @@ public class Entity {
         else {
             setAction();
             checkCollision();
-            // IF COLLISION = FALSE ,PLAYER CAN MOVE 
+            // Neu khong gap va cham moi co the di chuyen  
             if (collisionOn == false) {
                 switch (direction) {
                     case "up":
@@ -250,7 +253,7 @@ public class Entity {
     public void damagePlayer(int attack){
         if (gp.player.invincible == false) {
                
-            // we can give damage
+            // gay sat thuong
             gp.playSE(6);
             int damage = attack - gp.player.defense;
             if (damage<0) damage = 0;
@@ -306,7 +309,7 @@ public class Entity {
                     break;
             }
 
-            //MONTER HP BAR
+            //Thanh mau quai 
             if(type ==2 && hpBarON == true){
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;
@@ -379,10 +382,10 @@ public class Entity {
         gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
 
         if(gp.pFinder.search() == true){
-            // Next worldX and worldY
+            // Tim toa do diem den tiep theo
             int nextX =gp.pFinder.pathList.get(0).col * gp.tileSize;
             int nextY =gp.pFinder.pathList.get(0).row * gp.tileSize;
-            //Entity's solidArea position
+            //Vi tri muc tieu
             int enLeftX = worldX + solidArea.x;
             int enRightX = worldX + solidArea.x + solidArea.width;
             int enTopY = worldY + solidArea.y;
@@ -397,7 +400,7 @@ public class Entity {
 
             }
             else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize){
-                //left or right
+                //trai hoac phai
                 if(enLeftX > nextX){
                     direction = "left";
                 }
@@ -409,7 +412,7 @@ public class Entity {
             }
 
             else if(enTopY > nextY && enLeftX > nextX){
-                //up or left
+                //tren hoac trai
                 direction = "up";
                 checkCollision();
                 if(collisionOn == true){
@@ -417,7 +420,7 @@ public class Entity {
                 }
             }
             else if(enTopY > nextY && enLeftX <nextX){
-                //up or right
+                //tren hoac phai
                 direction = "up";
                 checkCollision();
                 if(collisionOn == true){
@@ -425,7 +428,7 @@ public class Entity {
                 }
             }
             else if(enTopY < nextY && enLeftX > nextX){
-                //down or left
+                //duoi hoac trai
                 direction = "down";
                 checkCollision();
                 if(collisionOn == true){
@@ -433,21 +436,13 @@ public class Entity {
                 }
             }
             else if(enTopY < nextY && enLeftX < nextX){
-                //down or right
+                //duoi hoac phai
                 direction = "down";
                 checkCollision();
                 if(collisionOn == true){
                     direction = "right";
                 }
             }
-            //If reaches the goal, stop the search
-            // int nextCol = gp.pFinder.pathList.get(0).col;
-            // int nextRow = gp.pFinder.pathList.get(0).row;
-            // if(nextCol == goalCol && nextRow == goalRow){
-            //     onPath = false;
-            // }
         }
-
     }
-
 }

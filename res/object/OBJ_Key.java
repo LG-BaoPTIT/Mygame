@@ -7,9 +7,9 @@ public class OBJ_Key extends Entity{
     
     public OBJ_Key(GamePanel gp) {
         super(gp);
-        name = "Key";
+        name = "Chia Khoa";
         down1 = setup("/objects/key",gp.tileSize, gp.tileSize);
-        description = "[" + name + "]\nIt opens a door.";
+        description = "[" + name + "]\nChia khoa mo cua";
         price = 100;
     } 
 }

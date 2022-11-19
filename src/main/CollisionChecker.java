@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package main;
 
 import entity.Entity;
 import entity.Player;
-// 123456789
+
 /**
  *
  * @author LGB
@@ -75,10 +71,10 @@ public class CollisionChecker {
          for(int i = 0;i < gp.obj[1].length; i++) {
             if(gp.obj[gp.currentMap][i] != null ) {
              
-//                 Get entity's solid area position
+//                 Lay toa do cua thuc the
                 entity.solidArea.x = entity.worldX + entity.solidArea.x;
                 entity.solidArea.y = entity.worldY + entity.solidArea.y;
-//                 Get the object's solid area position
+//                 Lay toa do cua vat the
                 gp.obj[gp.currentMap][i].solidArea.x = gp.obj[gp.currentMap][i].worldX + gp.obj[gp.currentMap][i].solidArea.x;
                 gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].worldY + gp.obj[gp.currentMap][i].solidArea.y;
                 
@@ -96,18 +92,16 @@ public class CollisionChecker {
                             
                                 index = i;
                             }
-                            
                         }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
                 gp.obj[gp.currentMap][i].solidArea.x = gp.obj[gp.currentMap][i].solidAreaDefaultX;
                 gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].solidAreaDefaultY;
-
             }
          }
          return index;
      }
-    //  NPC OR MONSTER
+    //  NPC hoac Quai
      public int checkEntity(Entity entity, Entity[][] target) {
 
         int index = 999;
@@ -115,10 +109,10 @@ public class CollisionChecker {
          for(int i = 0;i < target[1].length; i++) {
             if(target[gp.currentMap][i] != null ) {
              
-//                 Get entity's solid area position
+//                 Lay toa do cua thuc the
                 entity.solidArea.x = entity.worldX + entity.solidArea.x;
                 entity.solidArea.y = entity.worldY + entity.solidArea.y;
-//                 Get the object's solid area position
+//                 Lay toa do cua vat the
                 target[gp.currentMap][i].solidArea.x = target[gp.currentMap][i].worldX + target[gp.currentMap][i].solidArea.x;
                 target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].worldY + target[gp.currentMap][i].solidArea.y;
                 
@@ -147,10 +141,10 @@ public class CollisionChecker {
        
        boolean contactPlayer = false;
 
-            //Get entity's solid area position
+            //Lay toa do cua thuc the
             entity.solidArea.x = entity.worldX + entity.solidArea.x;
             entity.solidArea.y = entity.worldY + entity.solidArea.y;
-            //Get the object's solid area position
+            //Lay toa do cua vat the
             gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
             gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
             

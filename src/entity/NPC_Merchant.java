@@ -32,7 +32,7 @@ public class NPC_Merchant extends Entity{
         
 	}
     public void setDialogue(){
-        dialogues[0] = "He He, so you found me.\nI have some good stuff.\nDo you want to trade?";
+        dialogues[0] = "Xin chao\nTa co mot vai mon do\nco ich voi nguoi day.";
         
 
     }

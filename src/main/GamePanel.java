@@ -20,10 +20,9 @@ import java.awt.image.BufferedImage;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
 
-// inherited JPanel
-//12345132132
+// ke thua JPanel
 public class GamePanel extends JPanel implements Runnable {
-    //Screen setting
+    //cai dat hien thi
 
     final int originalTileSize = 16; //16*16
     final int scale = 3;
@@ -33,13 +32,13 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; //960px
     public final int screenHeight = tileSize * maxScreenRow; //576px
 
-    //world setting
+    //setting map
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 10;
     public int currentMap = 0;
     
-    //FOR FULL SCREEN
+    //toan man hinh 
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
@@ -50,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     //FPS
     int FPS = 60;
     
-    // SYSTEM
+    // he thong
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
@@ -63,8 +62,8 @@ public class GamePanel extends JPanel implements Runnable {
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
     Thread gameThread;
-    //ENTITY AND OBJECT
 
+    //ENTITY VA OBJECT
     public Player player = new Player(this, keyH);
     public Entity obj[][] = new Entity[maxMap][20];
     public Entity npc[][] = new Entity[maxMap][10];
@@ -75,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
-    // GAME STATE
+    // Trang thai game
     public int gameState;
     public final int titleState = 0;
     public final int playState = 1;
@@ -92,11 +91,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
 
-        //setDoubleBuffered : If set to true, all the drawing 
-        //from this component will be done in an off screen painting buffer.
+        //setDoubleBuffered : Neu set true ,tat ca se duoc ve truoc khi load 
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
-        //setFocusable(true): gamePanel can focus to receive key input
+        //setFocusable(true): gamePanel nhan input de hon
         this.setFocusable(true);
     }
 
@@ -124,9 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void restart(){
         player.setDefaultValues();
         player.setDefaultPositions();
-        // tam thoi
-        player.restoreLifeAndMan();
-        // 
+        player.restoreLifeAndMan(); 
         player.setItems();
         aSetter.setObject();
         aSetter.setNPC();
@@ -135,12 +131,11 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void setFullScreen() {
         
-        // Get local screen device
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         gd.setFullScreenWindow(Main.window);
         
-        //GET FULL SCREEN WIDTH AND HEIGHT
+        //Lay kich thuoc toan man hinh
         screenWidth2 = Main.window.getWidth();
         screenHeight2 = Main.window.getHeight();
         
@@ -153,17 +148,16 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double drawInterval = 1000000000 / FPS; // 0.016666..7s for each time drawing
-        double nextDrawTime = System.nanoTime() + drawInterval; //next draw time = current time + 0.01666...7
+        double drawInterval = 1000000000 / FPS; // 0.016666..7s moi lan update tren man hinh
+        double nextDrawTime = System.nanoTime() + drawInterval; //lan update tiep theo = hien tai + 0,0166...7s
 
         while (gameThread != null) {
 
-            //1: Update the information such as character positions
+            //1: update thay doi tren man hinh vd: vi tri player
             update();
-            //2: Draw the screen with the updated information
-//            repaint();
-            drawToTempScreen();// everything to the bufered image
-            drawToScreen();// draw the buffered image to the screen
+            //2: ve lai tren man hinh nhung thong tin duoc update
+            drawToTempScreen();// ve truoc = buffer
+            drawToScreen();// ve tu buffer le man hinh
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime /= 1000000;
@@ -184,7 +178,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         if (gameState == playState) {
-            // PLAYER
+            // Nguoi choi
             player.update();
             // NPC
             for (int i = 0; i < npc[1].length; i++) {
@@ -235,7 +229,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         if (gameState == pauseState) {
-            // nothing
+            
         }
     }
     public void drawToTempScreen() {
@@ -244,19 +238,19 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyH.checkDrawTime == true) {
             drawStart = System.nanoTime();
         }
-        //TITLE SCREEN
+        //Man hinh chinh
         if (gameState == titleState) {
             ui.draw(g2);
         } else {
             //TILE
             tileM.draw(g2);
-            //INTERACTIVE TILE
+            //TILE co the tuong tac duoc 
             for (int i = 0; i < iTile[1].length; i++) {
                 if (iTile[currentMap][i] != null) {
                     iTile[currentMap][i].draw(g2);
                 }
             }
-            //ADD ENTITIES TO THE LIST
+            //Them thuc the vao danh sach
             entityList.add(player);
             for (int i = 0; i < npc[1].length; i++) {
                 if (npc[currentMap][i] != null) {
@@ -285,7 +279,7 @@ public class GamePanel extends JPanel implements Runnable {
                     entityList.add(particleList.get(i));
                 }
             }
-            //SORT
+            //sap xep
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
@@ -293,11 +287,11 @@ public class GamePanel extends JPanel implements Runnable {
                     return result;
                 }
             });
-            //DRAW ENTITIES
+            //ve thuc the
             for (int i = 0; i < entityList.size(); i++) {
                 entityList.get(i).draw(g2);
             }
-            //EMPTY ENTITY LIST
+            //clear list
             entityList.clear();
             //UI
             ui.draw(g2);

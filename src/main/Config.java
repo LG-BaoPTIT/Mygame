@@ -21,7 +21,7 @@ public class Config {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("config.txt"));
             
-            // Full screen
+            // Toan man hinh
             if(gp.fullScreenOn == true) {
                 bw.write("On");
             }
@@ -30,11 +30,11 @@ public class Config {
             }
             bw.newLine();
             
-            //Music volume
+            //Am luong nhac
             bw.write(String.valueOf(gp.music.volumeScale));
             bw.newLine();
             
-            //SE volume
+            //Am luong hieu ung
             bw.write(String.valueOf(gp.se.volumeScale));
             bw.newLine();
             
@@ -42,7 +42,7 @@ public class Config {
             
             
         } catch (IOException e) {
-            //Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+            
             e.printStackTrace();
         }
     }
@@ -52,7 +52,7 @@ public class Config {
             
             String s = br.readLine();
             
-            //Full screen
+            //Toan man hinh
             if(s.equals("On")) {
                 gp.fullScreenOn = true;
             }
@@ -60,18 +60,18 @@ public class Config {
                 gp.fullScreenOn = false;
             }
             
-            // Music volume
+            // Am luong nhac
             s = br.readLine();
             gp.music.volumeScale = Integer.parseInt(s);
             
-            // SE volume
+            //Am luong hieu ung
             s = br.readLine();
             gp.se.volumeScale = Integer.parseInt(s);
             
             br.close();
             
         } catch (Exception e) {
-            //Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+            
             e.printStackTrace();
         }
     }

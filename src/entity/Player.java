@@ -49,11 +49,6 @@ public class Player extends Entity {
         solidArea.width = 32;
         solidArea.height = 32;
 
-        //attack range :depends on weapon:
-//        attackArea.width = 36;
-//        attackArea.height = 36;
-
-
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -62,39 +57,33 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-        // gp.currentMap = 1;
-        // worldX = gp.tileSize * 12;
-        // worldY = gp.tileSize * 12;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
         
-        //PLAYER STATUS
+        //Chi so cua nguoi choi
         level = 1;
         maxLife = 6;
         life = maxLife;
         maxMana =4;
         mana = maxMana;
         ammo = 10;
-        strength = 1;//the more strength he has, the more damage he gives
-        dexterity = 1;// the more dexterity he has, the less damage he receives
+        strength = 1;// cang nhieu cang gay nhieu sat thuong
+        dexterity = 1;// cang nhieu cang nhan it sat thuong
         exp = 0;
         nextLevelExp = 5;
         coin = 500;
-        currentWeapon = new OBJ_Sword_Normal(gp);// the total attack value is decided by strength and weapon
+        currentWeapon = new OBJ_Sword_Normal(gp);
         currentWeapon = new OBJ_Axe(gp);
-        currentShield = new OBJ_Shield_Wood(gp);// the total defense value is decided by dexterity and shield
+        currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_FireBall(gp);
-        //projectile = new OBJ_Rock(gp);
         attack = getAttack();
         defense = getDefense();
     }
     public void setDefaultPositions(){
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-        //tam thoi
-        gp.currentMap = 0;// map 0
-       
+        gp.currentMap = 0;      
         direction = "down";
     }
     public void restoreLifeAndMan(){
@@ -172,27 +161,27 @@ public class Player extends Entity {
                 direction = "right";
 
             }
-            //CHECK TILE COLLISION 
+            //check  va cham voi moi truong
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-            //CHECK OBJECT COLLISION
+            //check  va cham voi vat the
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
-            // CHECK NPC COLLISION
+            //check va cham voi entity
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
-            //CHECK MONSTER COLLISION
+            //check va cham voi quai
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
-            //CHECK INTERACTIVE TILE COLLISION
+            //check va cham voi moi truong dac biet (pha huy duoc)
             int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
             //CHECK EVENT
             gp.eHandler.checkEvent();
 
-            // IF COLLISION = FALSE ,PLAYER CAN MOVE 
+            // neu khong va cham ,nguoi choi co the di chuyen 
             if (collisionOn == false && keyH.enterPressed == false) {
                 switch (direction) {
                     case "up":
@@ -211,7 +200,7 @@ public class Player extends Entity {
             }
             
             if(keyH.enterPressed == true && attackCanceled == false) {
-               // gp.playSE(7);
+               gp.playSE(7);
                 attacking = true;
                 spriteCounter = 0;
             }
@@ -237,12 +226,12 @@ public class Player extends Entity {
         }
         
         if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && projectile.haveResource(this) == true){
-            //SET DEFAULT COORDINATES, DIRECTION AND USER
+            //dat vi tri dung chieu
             projectile.set(worldX, worldY, direction, true, this);
-            //SUBTRACT THE COST(MANA, AMO, ECT)
+            //tieu hao tai nguyen
             projectile.suptractResource(this);
           
-            //CHECK VACANCY
+            
             for(int i=0;i<gp.projectile[1].length;i++){
                 if(gp.projectile[gp.currentMap][i]==null){
                     gp.projectile[gp.currentMap][i]=projectile;
@@ -254,7 +243,7 @@ public class Player extends Entity {
             gp.playSE(10);
         } 
         
-//            This needs to be outside of key if statement
+
         if (invincible == true) {
             invincibleCounter++;
             if (invincibleCounter > 60) {
@@ -285,12 +274,12 @@ public class Player extends Entity {
         }
         if (spriteCounter > 5 && spriteCounter <= 25) {
             spriteNum = 2;
-            //Save the current worldX,worldY,solidArea
+            //luu toa do va kich thuoc cua nguoi choi
             int currentWorldX = worldX;
             int currentWorldY = worldY;
             int solidAreaWidth = solidArea.width;
             int solidAreaHeight = solidArea.height;
-            // Adjust player's worldX, worldY for the attackArea
+            // dieu chinh toa do cua nguoi choi
             switch (direction) {
                 case "up":
                     worldY -= attackArea.height;
@@ -305,10 +294,10 @@ public class Player extends Entity {
                     worldX += attackArea.width;
                     break;
             }
-            // attackArea become solidArea
+            
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
-            //check monster collision with the updated worldX,worldY and solidArea
+            //kiem tra lai va cham voi quai
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             damageMonster(monsterIndex,attack,currentWeapon.knockBackPower);
 
@@ -318,7 +307,7 @@ public class Player extends Entity {
             int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
             damageProjectile(projectileIndex);
             
-            // after checking collision restore the origin data
+            // khoi phuc lai toa do ban dau
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
@@ -334,24 +323,24 @@ public class Player extends Entity {
 
         if (i != 999) {
             
-            // PICKUP ONLY ITEMS
+            //vat pham chi nhat
             if(gp.obj[gp.currentMap][i].type == type_pickupOnly) {
                 
                 gp.obj[gp.currentMap][i].use(this);
                 gp.obj[gp.currentMap][i] = null;
             }
             
-            //INVENTORY ITEMS
+            //vat pham trong tui
             else {
                  String text;
                 if(inventory.size() != maxInventorySize) {
                 
                     inventory.add(gp.obj[gp.currentMap][i]);
                     gp.playSE(1);
-                    text  = "Got a " + gp.obj[gp.currentMap][i].name + "!";
+                    text  = "Nhan duoc " + gp.obj[gp.currentMap][i].name + "!";
                 }
                 else {
-                    text = "You cannot carry any more!";
+                    text = "Ban khong the mang them!";
                 }
                 gp.ui.addMessage(text);
                 gp.obj[gp.currentMap][i] = null;
@@ -418,7 +407,7 @@ public class Player extends Entity {
             gp.iTile[gp.currentMap][i].playSE();
             gp.iTile[gp.currentMap][i].life--;
             gp.iTile[gp.currentMap][i].invincible = true;
-            //generate partical
+            //sinh particle
             generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
             
             if(gp.iTile[gp.currentMap][i].life == 0){
@@ -444,8 +433,7 @@ public class Player extends Entity {
             defense = getDefense();
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You are level " + level + " now!\n"
-                    +"You feel stronger!";
+            gp.ui.currentDialogue = "Len cap " + level + "!\n";
         }
     }
     public void selectItem() {
@@ -471,17 +459,13 @@ public class Player extends Entity {
         }
     }
     public void draw(Graphics2D g2) {
-//		g2.setColor(Color.green);
-//		//draw a rectangle and paint with the chosen color 
-//		g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
         BufferedImage image = null;
         int tempScreenX = screenX;
         int tempScreenY = screenY;
 
         switch (direction) {
             case "up":
-                //if player not attack
+                //neu nguoi choi khong tan cong
 
                 if (attacking == false) {
                     if (spriteNum == 1) {
@@ -559,12 +543,6 @@ public class Player extends Entity {
         }
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
-        // Reset alpha
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
-//                DEBUG
-//                g2.setFont(new Font("Arial", Font.PLAIN, 26));
-//                g2.setColor(Color.white);
-//                g2.drawString("Invincible:" + invincibleCounter, 10, 400);
     }
 }
