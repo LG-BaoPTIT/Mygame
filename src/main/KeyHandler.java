@@ -22,23 +22,23 @@ public class KeyHandler implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
                 
-           //TITLE STATE
+           //Man hinh tieu de
              if(gp.gameState == gp.titleState) {
                     titleState(code);
             }
-		//PLAY STATE
+		//man hinh ingame
                 else if(gp.gameState == gp.playState){
                         playState(code);
 		}
-		//PAUSE STATE
+		//man hinh tam dung
 		else if(gp.gameState == gp.pauseState){
                     pauseState(code);
 		}
-		//DIALOGUE STATE
+		//man hinh tro chuyen
 		else if(gp.gameState == gp.dialogueState){
                     dialogueState(code);
 		}
-                //CHARACTER STATE
+                //man hinh 
                 else if(gp.gameState == gp.characterState) {
                     characterState(code);
                 }
