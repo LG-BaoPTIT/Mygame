@@ -14,15 +14,10 @@ import object.OBJ_Shield_Blue;
 
 
 public class AssetSetter {
-    
-    
     GamePanel gp;
-    
     public AssetSetter(GamePanel gp) {
-    
         this.gp = gp;
     }
-    
     public void setObject() {
         int i = 0;
         gp.obj[i] = new OBJ_Coin_Bronze(gp);
@@ -89,7 +84,22 @@ public class AssetSetter {
         gp.monster[i] = new MON_GreenSlime(gp);
         gp.monster[i].worldX = gp.tileSize*38;
         gp.monster[i].worldY = gp.tileSize*42;
-
+        i++;
+        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*36;
+        gp.monster[i].worldY = gp.tileSize*7;
+        i++;
+        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*37;
+        gp.monster[i].worldY = gp.tileSize*8;
+        i++;
+        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*34;
+        gp.monster[i].worldY = gp.tileSize*6;
+        i++;
+        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*39;
+        gp.monster[i].worldY = gp.tileSize*6;
 
     }
     

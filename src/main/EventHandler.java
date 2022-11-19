@@ -52,9 +52,9 @@ public class EventHandler {
               canTouchEvent = true;
           }
           if(canTouchEvent==true) {
-            if(hit(27,16,"right")==true) {damagePit(27,16,gp.dialogueState);}//lost happy
-//          if(hit(27,16,"right")==true) {teleport(gp.dialogueState);}//teleport
-            if(hit(23,19,"any")==true) {damagePit(27,16,gp.dialogueState);}//lost happy
+            // if(hit(27,16,"right")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
+            if(hit(27,16,"right")==true) {teleport(gp.dialogueState);}//teleport
+            if(hit(23,19,"any")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
             if(hit(23,12,"up")==true) { healingPool(27,16,gp.dialogueState);}
           }
         
@@ -86,12 +86,12 @@ public class EventHandler {
         return hit;
     }
     //dich chuyen 
-//    public void teleport(int gameState) {
-//        gp.gameState  = gameState;
-//        gp.ui.currentDialogue = "Teleport!";
-//        gp.player.worldX = gp.tileSize*37;
-//        gp.player.worldY = gp.tileSize*10;
-//    }
+   public void teleport(int gameState) {
+       gp.gameState  = gameState;
+       gp.ui.currentDialogue = "Teleport!";
+       gp.player.worldX = gp.tileSize*37;
+       gp.player.worldY = gp.tileSize*10;
+   }
     public void damagePit(int col, int row, int gameState) {
         gp.gameState = gameState;
         gp.playSE(6);

@@ -144,7 +144,7 @@ public class Player extends Entity {
         }
         
     }
-    public void update() {
+    public void update(){
         
         if (attacking == true) {
             attacking();
@@ -167,7 +167,7 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-//                CHECK OBJECT COLLISION
+            //CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
@@ -175,11 +175,11 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
-//                CHECK MONSTER COLLISION
+            //CHECK MONSTER COLLISION
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
-//                CHECK EVENT
+            //CHECK EVENT
             gp.eHandler.checkEvent();
 
             // IF COLLISION = FALSE ,PLAYER CAN MOVE 

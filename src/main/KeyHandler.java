@@ -24,17 +24,17 @@ public class KeyHandler implements KeyListener{
 		int code = e.getKeyCode();
                 
            //TITLE STATE
-             if(gp.gameState == gp.titleState) {
-                    titleState(code);
+           if(gp.gameState == gp.titleState) {
+                titleState(code);
             }
-		//PLAY STATE
-                else if(gp.gameState == gp.playState){
-                        playState(code);
-		}
-		//PAUSE STATE
-		else if(gp.gameState == gp.pauseState){
-                    pauseState(code);
-		}
+		    //PLAY STATE
+            else if(gp.gameState == gp.playState){
+                playState(code);
+		    }
+		    //PAUSE STATE
+		    else if(gp.gameState == gp.pauseState){
+                pauseState(code);
+		    }
 		//DIALOGUE STATE
 		else if(gp.gameState == gp.dialogueState){
                     dialogueState(code);
