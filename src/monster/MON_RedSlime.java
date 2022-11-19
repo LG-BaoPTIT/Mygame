@@ -4,10 +4,11 @@ import entity.Entity;
 import java.util.Random;
 import main.GamePanel;
 import object.OBJ_Coin_Bronze;
-import object.OBJ_FireBall;
+
+import object.OBJ_BlackFire;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
-import object.OBJ_Rock;
+
 
 /**
  *
@@ -23,12 +24,12 @@ public class MON_RedSlime extends Entity{
         type = type_monster;
         name = "Red Slime";
         speed = 4;
-        maxLife = 8;
+        maxLife = 5;
         life = maxLife;
-        attack = 10;
+        attack = 20;
         defense = 2;
         exp = 5;
-        projectile = new OBJ_FireBall(gp);
+        projectile = new OBJ_BlackFire(gp);
 
         solidArea.x = 3;
         solidArea.y = 18;

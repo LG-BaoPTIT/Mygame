@@ -16,6 +16,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
 import object.OBJ_FireBall;
+import object.OBJ_BlackFire;
 import object.OBJ_Key;
 import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
