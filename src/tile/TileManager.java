@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.UtilityTool;
 import tile.*;
+import java.util.Random;
 public class TileManager {
     
     GamePanel gp;
@@ -40,6 +41,10 @@ public class TileManager {
             setup(9, "grass00",false);
             setup(10, "grass00",false);
 // PLACEHOLDER
+            Random ran = new Random();
+            int x = ran.nextInt(4) + 1;
+            String tree = "tree" + Integer.toString(x);
+            
             setup(11, "grass01",false);
             setup(12, "water00",true);
             setup(13, "water01",true);
@@ -70,7 +75,10 @@ public class TileManager {
             setup(38, "road12",false);
             setup(39, "earth",false);
             setup(40, "wall",true);
-            setup(41, "tree",true);
+            setup(41, "tree1",true);
+            setup(42, "tree2",true);
+            setup(43, "tree3",true);
+            setup(44, "tree4",true);
            
 
     
