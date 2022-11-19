@@ -3,7 +3,9 @@ package main;
 
 import entity.NPC_OldMan;
 import monster.MON_GreenSlime;
+import monster.MON_RedSlime;
 import object.OBJ_Axe;
+import object.OBJ_Chest;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
 import object.OBJ_Heart;
@@ -55,6 +57,8 @@ public class AssetSetter {
         gp.obj[i].worldX = gp.tileSize*22;
         gp.obj[i].worldY = gp.tileSize*31;
         i++;
+
+        
     }
     public void setNPC() {
 
@@ -100,6 +104,18 @@ public class AssetSetter {
         gp.monster[i] = new MON_GreenSlime(gp);
         gp.monster[i].worldX = gp.tileSize*39;
         gp.monster[i].worldY = gp.tileSize*6;
+        i++;
+        gp.monster[i] = new MON_RedSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*13;
+        gp.monster[i].worldY = gp.tileSize*30;
+        i++;
+        gp.monster[i] = new MON_RedSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*12;
+        gp.monster[i].worldY = gp.tileSize*31;
+        i++;
+        gp.monster[i] = new MON_RedSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*11;
+        gp.monster[i].worldY = gp.tileSize*32;
 
     }
     
