@@ -101,6 +101,10 @@ public class UI {
             drawCharacterScreen();
             drawInventory();
         }
+        // Game over state
+        if(gp.gameState == gp.gameOverState) {
+           drawGameOverScreen();
+        }
     }
     public void drawPlayerLife(){
        
@@ -265,50 +269,6 @@ public class UI {
                     g2.drawString(">", x-gp.tileSize, y);
                 }
             }
-//        g2.setColor(new Color(0,0,0));
-//        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-////        TITLE NAME
-//        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
-//        String text = "Blue Boy Adventure";
-//        int x = getXforCenteredText(text);
-//        int y = gp.tileSize*3;
-////        SHADOW
-//        g2.setColor(Color.gray);
-//        g2.drawString(text, x+5, y+5);
-////        MAIN COLOR
-//        g2.setColor(Color.white);
-//        g2.drawString(text, x, y);
-////        BLUE BOY IMAGE
-//        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-//        y += gp.tileSize*2;
-//        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
-//    
-////        MENU
-//        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
-//        
-//        text = "NEW GAME";
-//        x = getXforCenteredText(text);
-//        y += gp.tileSize*3.5;
-//        g2.drawString(text, x, y);
-//        if(commandNum == 0) {
-//            g2.drawString(">", x-gp.tileSize, y);
-//        }
-//        
-//        text = "LOAD GAME";
-//        x = getXforCenteredText(text);
-//        y += gp.tileSize;
-//        g2.drawString(text, x, y);
-//        if(commandNum == 1) {
-//            g2.drawString(">", x-gp.tileSize, y);
-//        }
-//        
-//        text = "QUIT";
-//        x = getXforCenteredText(text);
-//        y += gp.tileSize;
-//        g2.drawString(text, x, y);
-//        if(commandNum == 2) {
-//            g2.drawString(">", x-gp.tileSize, y);
-//        }
     }
     public void drawPauseScreen() {
 
@@ -426,6 +386,41 @@ public class UI {
         g2.drawImage(gp.player.currentWeapon.down1, tailX-gp.tileSize, textY-24,null);
         textY += gp.tileSize;
         g2.drawImage(gp.player.currentShield.down1, tailX-gp.tileSize, textY-24, null);
+    }
+    public void drawGameOverScreen(){
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        int x,y;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+
+        text = "Game Over";
+        //shadow
+        g2.setColor(Color.BLACK);
+        x= getXforCenteredText(text);
+        y = gp.tileSize * 4;
+        g2.drawString(text, x, y);
+        // Main
+        g2.setColor(Color.white);
+        g2.drawString(text, x-4, y-4);
+        //Retry
+        g2.setFont(g2.getFont().deriveFont(50f));
+        text = "Retry";
+        x = getXforCenteredText(text);
+        y += gp.tileSize *4;
+        g2.drawString(text, x, y);
+        if(commandNum == 0){
+            g2.drawString(">", x-40, y);
+        }
+
+        // bach to the title Screen
+        text = "Quit";
+        x = getXforCenteredText(text);
+        y+=55;
+        g2.drawString(text, x, y);
+        if(commandNum == 1){
+            g2.drawString(">", x-40, y);
+        }
     }
     public void drawInventory() {
         // FRAME
