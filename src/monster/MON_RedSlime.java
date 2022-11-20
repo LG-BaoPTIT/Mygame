@@ -4,20 +4,12 @@ import entity.Entity;
 import java.util.Random;
 import main.GamePanel;
 import object.OBJ_Coin_Bronze;
-
 import object.OBJ_BlackFire;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 
-
-/**
- *
- * @author admin
- */
 public class MON_RedSlime extends Entity{
-    
     GamePanel gp;
-    
     public MON_RedSlime(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -26,7 +18,7 @@ public class MON_RedSlime extends Entity{
         speed = 4;
         maxLife = 5;
         life = maxLife;
-        attack = 20;
+        attack = 8;
         defense = 2;
         exp = 5;
         projectile = new OBJ_BlackFire(gp);
@@ -72,7 +64,7 @@ public class MON_RedSlime extends Entity{
             actionLockCounter = 0;
             
         }
-        int i = new Random().nextInt(100)+1;
+        int i = new Random().nextInt(100)+1; 
         if(i>99 && projectile.alive == false && shotAvailableCounter == 30){
             projectile.set(worldX, worldY, direction, true, this);
             gp.projectileList.add(projectile);

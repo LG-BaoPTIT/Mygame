@@ -54,7 +54,7 @@ public class EventHandler {
           if(canTouchEvent==true) {
             // if(hit(27,16,"right")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
             if(hit(27,16,"right")==true) {teleport(gp.dialogueState);}//teleport
-            if(hit(23,19,"any")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
+            // if(hit(23,19,"any")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
             if(hit(23,12,"up")==true) { healingPool(27,16,gp.dialogueState);}
           }
         

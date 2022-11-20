@@ -116,6 +116,17 @@ public class AssetSetter {
         gp.monster[i] = new MON_RedSlime(gp);
         gp.monster[i].worldX = gp.tileSize*11;
         gp.monster[i].worldY = gp.tileSize*32;
+        i++;
+        gp.monster[i] = new MON_RedSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*11;
+        gp.monster[i].worldY = gp.tileSize*32;
+        i++;
+        
+        gp.monster[i] = new MON_RedSlime(gp);
+        gp.monster[i].worldX = gp.tileSize*36;
+        gp.monster[i].worldY = gp.tileSize*42;
+        i++;
+        
 
     }
     

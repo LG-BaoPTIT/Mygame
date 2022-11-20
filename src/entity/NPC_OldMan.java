@@ -1,16 +1,12 @@
 package entity;
 
 import java.util.Random;
-
-import javax.swing.text.AbstractWriter;
-
 import main.GamePanel;
 
 public class NPC_OldMan extends Entity{
 
     public NPC_OldMan(GamePanel gp) {
         super(gp);
-
         direction = "down";
         speed = 1;
 
@@ -18,7 +14,6 @@ public class NPC_OldMan extends Entity{
         setDialogue();
     }
     public void getImage() {
-		
         up1 = setup("/npc/oldman_up_1",gp.tileSize, gp.tileSize);
         up2 = setup("/npc/oldman_up_2",gp.tileSize, gp.tileSize);
         down1 = setup("/npc/oldman_down_1",gp.tileSize, gp.tileSize);
@@ -27,23 +22,22 @@ public class NPC_OldMan extends Entity{
         left2 = setup("/npc/oldman_left_2",gp.tileSize, gp.tileSize);
         right1 = setup("/npc/oldman_right_1",gp.tileSize, gp.tileSize);
         right2 = setup("/npc/oldman_right_2",gp.tileSize, gp.tileSize);
-        
 	}
     public void setDialogue(){
-        dialogues[0] = "Hello, mayconvo.";
-        dialogues[1] = "So you've come to this island to\nfind the treasure?";
-        dialogues[2] = "I used to be a great nwizard but now... \nI'm a bit to old for taking an adventure.";
-        dialogues[3] = "Well, good luck on you.";
-
+        dialogues[0] = "Welcome to the forest of death...";
+        dialogues[1] = "You still come to this island to find treasure?";
+        dialogues[2] = "I used to be a great hunter before I came \nhere...but now I'm dead and I'm just a soul";
+        dialogues[3] = "I am here to tell you that \nthis forest is not as beautiful as it seems";
+        dialogues[4] = "Monsters are fast and can attack from a \ndistance";
+        dialogues[5] = "Be alert and sensitive to any situation \nat any time you will have to pay for your \nmistake";
+        dialogues[6] = "Well, good luck on you.";
+        
     }
     public void setAction() {
-
         actionLockCounter ++;
-
         if(actionLockCounter == 120) {
             Random random = new Random();
             int i = random.nextInt(100) + 1;//pick up a number from 1 to 100
-
             if( i <= 25) {
                 direction = "up";
             }
@@ -56,7 +50,6 @@ public class NPC_OldMan extends Entity{
             if(i>75 && i <= 100) {
                 direction = "right";
             }
-
             actionLockCounter = 0;
         } 
     }
