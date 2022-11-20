@@ -5,10 +5,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
+
+import ai.PathFinder;
+
 import java.util.*;
 import entity.Entity;
 import entity.Player;
-
+import tile.InteractiveTile;
 import tile.TileManager;
 public class GamePanel extends JPanel implements Runnable{
 	//Screen setting
@@ -27,10 +30,11 @@ public class GamePanel extends JPanel implements Runnable{
     //FPS
 	int FPS = 60;
 	
-	TileManager tileM = new TileManager(this);
-        public KeyHandler keyH = new KeyHandler(this);
-        Sound music = new Sound();
-        Sound se = new Sound();
+    public PathFinder pFinder = new PathFinder(this);
+	public TileManager tileM = new TileManager(this);
+    public KeyHandler keyH = new KeyHandler(this);
+    Sound music = new Sound();
+    Sound se = new Sound();
 	
 	public CollisionChecker cChecker =new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
@@ -38,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable{
     public EventHandler eHandler = new EventHandler(this);
     Thread gameThread;
 	//ENTITY AND OBJECT
-          
+    public InteractiveTile iTile[][] = new InteractiveTile[10][50];      
     public Player player = new Player(this,keyH);
     public Entity obj[] = new Entity[20];
 	public Entity npc[] = new Entity[10];
