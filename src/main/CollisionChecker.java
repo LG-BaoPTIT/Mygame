@@ -5,8 +5,6 @@
 package main;
 
 import entity.Entity;
-import entity.Player;
-// 123456789
 /**
  *
  * @author LGB
@@ -75,10 +73,10 @@ public class CollisionChecker {
          for(int i = 0;i < gp.obj.length; i++) {
             if(gp.obj[i] != null ) {
              
-//                 Get entity's solid area position
+                //Nhận vị trí vùng rắn của thực thể
                 entity.solidArea.x = entity.worldX + entity.solidArea.x;
                 entity.solidArea.y = entity.worldY + entity.solidArea.y;
-//                 Get the object's solid area position
+                //Lấy vị trí vùng rắn của đối tượng
                 gp.obj[i].solidArea.x = gp.obj[i].worldX + gp.obj[i].solidArea.x;
                 gp.obj[i].solidArea.y = gp.obj[i].worldY + gp.obj[i].solidArea.y;
                 
@@ -115,10 +113,10 @@ public class CollisionChecker {
          for(int i = 0;i < target.length; i++) {
             if(target[i] != null ) {
              
-//                 Get entity's solid area position
+                //Nhận vị trí vùng rắn của thực thể
                 entity.solidArea.x = entity.worldX + entity.solidArea.x;
                 entity.solidArea.y = entity.worldY + entity.solidArea.y;
-//                 Get the object's solid area position
+                //Lấy vị trí vùng rắn của đối tượng
                 target[i].solidArea.x = target[i].worldX + target[i].solidArea.x;
                 target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
                 
@@ -147,10 +145,10 @@ public class CollisionChecker {
        
        boolean contactPlayer = false;
 
-            //Get entity's solid area position
+            //Nhận vị trí vùng rắn của thực thể
             entity.solidArea.x = entity.worldX + entity.solidArea.x;
             entity.solidArea.y = entity.worldY + entity.solidArea.y;
-            //Get the object's solid area position
+            //Lấy vị trí vùng rắn của đối tượng
             gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
             gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
             

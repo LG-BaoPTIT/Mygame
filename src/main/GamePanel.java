@@ -4,17 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.JPanel;
 import java.util.*;
-import java.io.*;
 import entity.Entity;
 import entity.Player;
 
 import tile.TileManager;
-
-// inherited JPanel
-//12345132132
 public class GamePanel extends JPanel implements Runnable{
 	//Screen setting
 	final int originalTileSize = 16; //16*16
@@ -25,12 +20,11 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenWidth = tileSize*maxScreenCol; //768px
 	public final int screenHeight = tileSize*maxScreenRow; //576px
 	
-        //world setting
-        public final int maxWorldCol = 50;
-        public final int maxWorldRow = 50;
-//        public final int worldWidth = tileSize * maxWorldCol ;
-//	public final int worldHeight = tileSize * maxWorldRow ;
-        //FPS
+    //world setting
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
+
+    //FPS
 	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
@@ -39,18 +33,18 @@ public class GamePanel extends JPanel implements Runnable{
         Sound se = new Sound();
 	
 	public CollisionChecker cChecker =new CollisionChecker(this);
-        public AssetSetter aSetter = new AssetSetter(this);
-        public UI ui = new UI(this);
-        public EventHandler eHandler = new EventHandler(this);
-        Thread gameThread;
+    public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler(this);
+    Thread gameThread;
 	//ENTITY AND OBJECT
           
-        public Player player = new Player(this,keyH);
-        public Entity obj[] = new Entity[20];
+    public Player player = new Player(this,keyH);
+    public Entity obj[] = new Entity[20];
 	public Entity npc[] = new Entity[10];
-        public Entity monster[] = new Entity[20];
-        public ArrayList<Entity> projectileList = new ArrayList<>();
-        ArrayList<Entity> entityList = new ArrayList<>();
+    public Entity monster[] = new Entity[20];
+    public ArrayList<Entity> projectileList = new ArrayList<>();
+    ArrayList<Entity> entityList = new ArrayList<>();
         
 	// GAME STATE
 	public int gameState;
@@ -65,12 +59,8 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		this.setBackground(Color.black);
-		
-		//setDoubleBuffered : If set to true, all the drawing 
-		//from this component will be done in an off screen painting buffer.
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
-		//setFocusable(true): gamePanel can focus to receive key input
 		this.setFocusable(true);
 	}
         
@@ -104,12 +94,12 @@ public class GamePanel extends JPanel implements Runnable{
     }
 	@Override
 	public void run() {
-		double drawInterval = 1000000000/FPS; // 0.016666..7s for each time drawing
-		double nextDrawTime = System.nanoTime() + drawInterval; //next draw time = current time + 0.01666...7
+		double drawInterval = 1000000000/FPS; // 0.016666..7s mỗi lần vẽ
+		double nextDrawTime = System.nanoTime() + drawInterval; 
 		while(gameThread != null) {
-			//1: Update the information such as character positions
+			//1: Cập nhật các thông tin như vị trí ký tự
 			update();
-			//2: Draw the screen with the updated information
+			//2: Vẽ màn hình với thông tin được cập nhật
 			repaint();
 			
 			try {
@@ -122,7 +112,6 @@ public class GamePanel extends JPanel implements Runnable{
 				Thread.sleep((long)remainingTime);
 				nextDrawTime += drawInterval;
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -166,13 +155,11 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	public void paintComponent(Graphics g) { // this is repaint method
-		//Graphics is the class drawing object 
-		
+		//Graphics is the class drawing object 	
 		super.paintComponent(g);
 		//super is object of the father class
-		
 		Graphics2D g2 = (Graphics2D)g;
-		// //DEBUG
+		//DEBUG
 		long drawStart = 0;
 		if(keyH.checkDrawTime == true){
 			drawStart = System.nanoTime();
@@ -231,7 +218,7 @@ public class GamePanel extends JPanel implements Runnable{
 			g2.drawString("Draw Time" + passed, 10, 400);
 			System.out.println("Draw Time:" + passed);
 		}
-		//Dispose of this graphics context and release any system resources that it is using
+		//Vứt bỏ ngữ cảnh đồ họa này và giải phóng mọi tài nguyên hệ thống mà nó đang sử dụng
 		g2.dispose();
 	} 
     public void playMusic(int i) {

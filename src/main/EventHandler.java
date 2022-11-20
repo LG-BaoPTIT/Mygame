@@ -3,9 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
-
-import java.awt.Rectangle;
-
 /**
  *
  * @author admin
@@ -44,19 +41,19 @@ public class EventHandler {
     
     public void checkEvent() {
         
-//        check if the player character is more than 1 tile away from the last event
-          int xDistance = Math.abs(gp.player.worldX - previousEventX);
-          int ydistance = Math.abs(gp.player.worldY - previousEventY);
-          int distance = Math.max(xDistance, ydistance);
-          if(distance > gp.tileSize) {
-              canTouchEvent = true;
-          }
-          if(canTouchEvent==true) {
+        //kiểm tra xem nhân vật của người chơi có cách sự kiện cuối cùng hơn 1 ô không
+        int xDistance = Math.abs(gp.player.worldX - previousEventX);
+        int ydistance = Math.abs(gp.player.worldY - previousEventY);
+        int distance = Math.max(xDistance, ydistance);
+        if(distance > gp.tileSize) {
+            canTouchEvent = true;
+        }
+        if(canTouchEvent==true) {
             // if(hit(27,16,"right")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
             if(hit(27,16,"right")==true) {teleport(gp.dialogueState);}//teleport
             // if(hit(23,19,"any")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
             if(hit(23,12,"up")==true) { healingPool(27,16,gp.dialogueState);}
-          }
+        }
         
         
     }

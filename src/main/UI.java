@@ -449,14 +449,6 @@ public class UI {
         g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
-//    public void drawPauseScreen() {
-//
-//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
-//        String text = "PAUSED";
-//        int x = getXforCenteredText(text);
-//        int y = gp.screenHeight/2;
-//        g2.drawString(text, x, y);
-//    }
     public int getXforCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;

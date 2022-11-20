@@ -1,11 +1,9 @@
 package entity;
 
 import java.awt.AlphaComposite;
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-
 import java.util.ArrayList;
 import main.GamePanel;
 import main.KeyHandler;
@@ -41,11 +39,6 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
-
-        //attack range :depends on weapon:
-//        attackArea.width = 36;
-//        attackArea.height = 36;
-
 
         setDefaultValues();
         getPlayerImage();
@@ -194,7 +187,7 @@ public class Player extends Entity {
             }
             
             if(keyH.enterPressed == true && attackCanceled == false) {
-                gp.playSE(7);
+                //gp.playSE(7);
                 attacking = true;
                 spriteCounter = 0;
             }
@@ -231,7 +224,7 @@ public class Player extends Entity {
             gp.playSE(10);
         } 
         
-//            This needs to be outside of key if statement
+
         if (invincible == true) {
             invincibleCounter++;
             if (invincibleCounter > 60) {
