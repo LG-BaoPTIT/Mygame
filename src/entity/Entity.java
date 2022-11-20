@@ -9,15 +9,13 @@ import main.GamePanel;
 import main.UtilityTool;
 import java.awt.Graphics2D;
 import java.awt.Color;
-//This store player class,enemy class,Npc class
-
 public class Entity {
 
     GamePanel gp;
 
     public int speed;
 
-    //BufferedImage describes an image with an accessible buffer of image data
+    //BufferedImage mô tả một hình ảnh có bộ đệm dữ liệu hình ảnh có thể truy cập
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2,
             attackRight1, attackRight2;
@@ -103,7 +101,7 @@ public class Entity {
     }
 
     public void use(Entity entity) {
-        
+  
     }
     public void checkDrop() {}
     public void dropItem(Entity droppedItem){
