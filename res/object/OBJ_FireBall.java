@@ -15,7 +15,7 @@ public class OBJ_FireBall extends Projectile
         speed = 5;
         maxLife = 80;
         life = maxLife;
-        attack = 5;
+        attack = 4;
         useCost = 1;
         alive = false;
         getImage();

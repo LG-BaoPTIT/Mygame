@@ -1,24 +1,16 @@
 package entity;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
+
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.Buffer;
+
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
 import main.GamePanel;
 import main.KeyHandler;
-import main.UtilityTool;
 import object.OBJ_FireBall;
-import object.OBJ_BlackFire;
 import object.OBJ_Key;
-import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -355,7 +347,6 @@ public class Player extends Entity {
     }
     public void damageMonster(int i,int attack) {
         if (i != 999) {
-
             if (gp.monster[i].invincible == false) {
                 gp.playSE(5);
                 int damage = attack - gp.monster[i].defense;
@@ -415,10 +406,6 @@ public class Player extends Entity {
         }
     }
     public void draw(Graphics2D g2) {
-//		g2.setColor(Color.green);
-//		//draw a rectangle and paint with the chosen color 
-//		g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
         BufferedImage image = null;
         int tempScreenX = screenX;
         int tempScreenY = screenY;
