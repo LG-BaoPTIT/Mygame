@@ -15,10 +15,10 @@ public class MON_RedSlime extends Entity{
         this.gp = gp;
         type = type_monster;
         name = "Red Slime";
-        speed = 4;
-        maxLife = 10;
+        speed = 3;
+        maxLife = 8;
         life = maxLife;
-        attack = 8;
+        attack = 5;
         defense = 2;
         exp = 5;
         projectile = new OBJ_BlackFire(gp);
