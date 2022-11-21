@@ -54,8 +54,6 @@ public class EventHandler {
             // if(hit(23,19,"any")==true) {damagePit(27,16,gp.dialogueState);}//lost hp
             if(hit(23,12,"up")==true) { healingPool(27,16,gp.dialogueState);}
         }
-        
-        
     }
     public boolean hit(int col, int row, String reqDirection) {
         boolean hit = false;
@@ -68,7 +66,6 @@ public class EventHandler {
         if(gp.player.solidArea.intersects(eventRect[col][row]) && eventRect[col][row].eventDone == false) {
             if(gp.player.direction.contains(reqDirection) || reqDirection.contentEquals("any")) {
                 hit = true;
-                
                 previousEventX = gp.player.worldX;
                 previousEventY = gp.player.worldY;
             }

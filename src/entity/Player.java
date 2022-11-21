@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_FireBall;
@@ -338,6 +339,7 @@ public class Player extends Entity {
             }
         }
     }
+    
     public void damageMonster(int i,int attack) {
         if (i != 999) {
             if (gp.monster[i].invincible == false) {
@@ -366,6 +368,7 @@ public class Player extends Entity {
             level++;
             nextLevelExp*=2;
             maxLife+=2;
+            maxMana+=1;
             strength++;
             dexterity++;
             attack = getAttack();

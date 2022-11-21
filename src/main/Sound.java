@@ -19,7 +19,6 @@ public class Sound {
     URL soundURL[] = new URL[30];
     
     public Sound() {
-    
         soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
         soundURL[1] = getClass().getResource("/sound/coin.wav");
         soundURL[2] = getClass().getResource("/sound/powerup.wav");
@@ -48,7 +47,6 @@ public class Sound {
     }
     public void loop() {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
-    
     }
     public void stop() {
             clip.stop();
