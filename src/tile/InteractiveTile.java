@@ -1,10 +1,8 @@
 package tile;
 
 import entity.Entity;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
-
 import main.GamePanel;
 
 public abstract class InteractiveTile extends Entity {
@@ -54,17 +52,6 @@ public abstract class InteractiveTile extends Entity {
 
             g2.drawImage(down1, screenX, screenY, null);
 
-        }
-        if(drawPath == true){
-            g2.setColor(new Color(255,0,0,70));
-            for(int i=0;i<gp.pFinder.pathList.size();i++){
-                int worldX = gp.pFinder.pathList.get(i).col * gp.tileSize;
-                int worldY = gp.pFinder.pathList.get(i).row * gp.tileSize;
-                int a =worldX -gp.player.worldX + gp.player.screenX;
-                int b =worldY -gp.player.worldY + gp.player.screenY;
-                
-                g2.fillRect(a, b, gp.tileSize, gp.tileSize);
-            }
         }
     }
     
